@@ -1,0 +1,34 @@
+[debug] [2018-02-02T05:26:52.928Z] ----------------------------------------------------------------------
+[debug] [2018-02-02T05:26:52.930Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --only functions
+[debug] [2018-02-02T05:26:52.930Z] CLI Version:   3.17.4
+[debug] [2018-02-02T05:26:52.930Z] Platform:      darwin
+[debug] [2018-02-02T05:26:52.930Z] Node Version:  v8.9.4
+[debug] [2018-02-02T05:26:52.931Z] Time:          Thu Feb 01 2018 21:26:52 GMT-0800 (PST)
+[debug] [2018-02-02T05:26:52.931Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-02-02T05:26:52.941Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-02-02T05:26:52.942Z] > authorizing via signed-in user
+[debug] [2018-02-02T05:26:52.943Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/efx-beta  
+  
+ Thu Feb 01 2018 21:26:52 GMT-0800 (PST)
+[debug] [2018-02-02T05:26:53.379Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-02T05:26:53.379Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/efx-beta/tokens  
+  
+ Thu Feb 01 2018 21:26:53 GMT-0800 (PST)
+[debug] [2018-02-02T05:26:53.782Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/jeremycollins/Projects/EFX A'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-02-02T05:26:54.109Z] Fetching environment
+[debug] [2018-02-02T05:26:54.110Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/efx-beta  
+  
+ Thu Feb 01 2018 21:26:54 GMT-0800 (PST)
+[debug] [2018-02-02T05:26:54.110Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/efx-beta/apiKeys  
+  
+ Thu Feb 01 2018 21:26:54 GMT-0800 (PST)
+[debug] [2018-02-02T05:26:54.591Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-02T05:26:54.725Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-02T05:26:54.726Z] Starting @google-cloud/functions-emulator
+[debug] [2018-02-02T05:26:54.779Z] Parsing function triggers
+[info] ✔  functions: api: http://localhost:8010/efx-beta/us-central1/api

@@ -1,0 +1,14 @@
+include .env
+
+export TAG=${DOMAIN}/${REPOSITORY}:${VERSION}
+export FULL=${HUB_BASE_URI}/${TAG}
+default: build
+
+build:
+	docker build -t ${TAG} .
+
+push:
+	docker push ${TAG}
+
+run:
+	docker run --rm ${TAG}
