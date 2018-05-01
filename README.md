@@ -14,8 +14,10 @@ To get started
 
 Then...
 `npm run test`
+
 Additionally, you can check the `getUser` endpoint by hitting the URLs such as `/user?id=1234`
 
 Read more on [CQRS](https://martinfowler.com/bliki/CQRS.html)
+
 This project (particularly the CQRS pattern) was kickstarted with lots of help by [Jason Raimondi](https://github.com/jasonraimondi)
 
