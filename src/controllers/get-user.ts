@@ -14,6 +14,6 @@ export let execute = async (req: Request, response: Response) => {
 
     const getUserCommand = new GetUser(null, emailAddress);
     const getUserResponse = await appCore.dispatchQuery(getUserCommand);
-    console.log(getUserResponse);
+    return response.json(getUserResponse);
 
 };

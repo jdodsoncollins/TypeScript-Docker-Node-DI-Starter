@@ -5,6 +5,7 @@ import * as bodyParser from 'body-parser';
 import * as helmet from 'helmet';
 import "reflect-metadata";
 import * as getUser from './controllers/get-user';
+import * as createUser from './controllers/create-user';
 
 import { RouteDefinitions } from './routing/route-definitions.constant';
 
@@ -26,5 +27,6 @@ app.use(cors(corsOptions));
 // app.use(helmet());
 
 app.get(RouteDefinitions['user'], getUser.execute);
+app.post(RouteDefinitions['user.create'], createUser.execute);
 
 module.exports = app;

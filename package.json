@@ -33,9 +33,9 @@
     "morgan": "^1.9.0",
     "mysql": "^2.15.0",
     "ts-node": "^5.0.1",
-    "typedi": "^0.7.2",
-    "typeorm": "^0.2.0",
-    "typeorm-typedi-extensions": "^0.2.0",
+    "typedi": "^0.7.3",
+    "typeorm": "^0.2.6",
+    "typeorm-typedi-extensions": "^0.2",
     "typescript": "^2.7.1",
     "uuid": "^3.2.1"
   },
