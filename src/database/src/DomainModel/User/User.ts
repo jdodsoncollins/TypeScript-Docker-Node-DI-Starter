@@ -16,6 +16,9 @@ export class User implements IEntity {
   @Column({ type: 'varchar', nullable: true, name: 'lastName' })
   private _lastName: string | null;
 
+  @Column({ type: 'varchar', nullable: true, name: 'password' })
+  private _password: string | null;
+  
   constructor(id:string = null) {
     this.setId(id);
   }
@@ -46,6 +49,14 @@ export class User implements IEntity {
 
   set lastName(value: string | null) {
     this._lastName = value;
+  }
+
+  get password(): string | null {
+    return this._password;
+  }
+
+  set password(value: string | null) {
+    this._password = value;
   }
 
   private setId(id: string | null): void {

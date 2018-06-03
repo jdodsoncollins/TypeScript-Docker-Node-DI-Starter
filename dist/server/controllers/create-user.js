@@ -39,7 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var ApplicationCore_1 = require("../database/src/Infrastructure/Lib/ApplicationCore");
 var CreateUser_1 = require("../database/src/Action/User/CreateUser");
 exports.execute = function (req, response) { return __awaiter(_this, void 0, void 0, function () {
-    var firstName, lastName, emailAddress, appCore, createUserCommand, createUserResponse;
+    var firstName, lastName, emailAddress, password, appCore, createUserCommand, createUserResponse;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -47,8 +47,9 @@ exports.execute = function (req, response) { return __awaiter(_this, void 0, voi
                 firstName = req.body.firstName;
                 lastName = req.body.lastName;
                 emailAddress = req.body.email;
+                password = req.body.password;
                 appCore = new ApplicationCore_1.ApplicationCore();
-                createUserCommand = new CreateUser_1.CreateUser(firstName, lastName, emailAddress);
+                createUserCommand = new CreateUser_1.CreateUser(firstName, lastName, emailAddress, password);
                 return [4 /*yield*/, appCore.dispatchQuery(createUserCommand)];
             case 1:
                 createUserResponse = _a.sent();

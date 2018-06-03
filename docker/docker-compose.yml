@@ -13,6 +13,7 @@ services:
     image: mariadb
     volumes:
     - "./database:/var/lib/mysql"
+    - "./database/docker-entrypoint-initdb.d"
     ports:
     - "33066:3306"
     environment:

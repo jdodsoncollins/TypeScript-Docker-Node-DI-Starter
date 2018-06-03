@@ -15,7 +15,7 @@ createConnection(
   .then(
     async (connection: Connection) => {
         const appCore = Container.get(ApplicationCore);
-        const newUserCommand = new CreateUser('Mickey', 'Mouse', 'mickey@mickeymouse.com');
+        const newUserCommand = new CreateUser('Mickey', 'Mouse', 'mickey@mickeymouse.com', 'pa$$word');
         const newUserResponse = await appCore.dispatchCommand(newUserCommand);
         console.log('new user response', newUserResponse);
         const getUserCommand = new GetUser(null, 'mickey@mickeymouse.com');

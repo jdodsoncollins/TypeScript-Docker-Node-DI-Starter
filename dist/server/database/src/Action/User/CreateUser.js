@@ -3,11 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CreateUserHandler_1 = require("../../ActionHandler/User/CreateUserHandler");
 var User_1 = require("../../DomainModel/User/User");
 var CreateUser = /** @class */ (function () {
-    function CreateUser(_firstName, _lastName, _email) {
+    function CreateUser(_firstName, _lastName, _email, _password) {
         if (_email === void 0) { _email = null; }
         this._firstName = _firstName;
         this._lastName = _lastName;
         this._email = _email;
+        this._password = _password;
         this._user = new User_1.User();
         if (_firstName) {
             this.setFirstName(_firstName);
@@ -17,6 +18,9 @@ var CreateUser = /** @class */ (function () {
         }
         if (_email) {
             this.setEmail(_email);
+        }
+        if (_password) {
+            this.setPassword(_password);
         }
     }
     Object.defineProperty(CreateUser.prototype, "user", {
@@ -34,6 +38,9 @@ var CreateUser = /** @class */ (function () {
     };
     CreateUser.prototype.setEmail = function (email) {
         this._user.email = email;
+    };
+    CreateUser.prototype.setPassword = function (password) {
+        this._user.password = password;
     };
     CreateUser.prototype.getActionHandler = function () {
         return new CreateUserHandler_1.CreateUserHandler(this);

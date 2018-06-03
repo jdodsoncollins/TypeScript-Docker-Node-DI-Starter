@@ -51,7 +51,7 @@ typeorm_1.createConnection(ormconfig_1.MysqlConnection.connect())
         switch (_a.label) {
             case 0:
                 appCore = typedi_1.Container.get(ApplicationCore_1.ApplicationCore);
-                newUserCommand = new CreateUser_1.CreateUser('Mickey', 'Mouse', 'mickey@mickeymouse.com');
+                newUserCommand = new CreateUser_1.CreateUser('Mickey', 'Mouse', 'mickey@mickeymouse.com', 'pa$$word');
                 return [4 /*yield*/, appCore.dispatchCommand(newUserCommand)];
             case 1:
                 newUserResponse = _a.sent();

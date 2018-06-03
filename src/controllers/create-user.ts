@@ -8,6 +8,7 @@ export let execute = async (req: Request, response: Response) => {
     let firstName = req.body.firstName;
     let lastName = req.body.lastName;
     let emailAddress = req.body.email;
+    let password = req.body.password;
     const appCore = new ApplicationCore();
 
     // if (!emailAddress) {
@@ -16,7 +17,7 @@ export let execute = async (req: Request, response: Response) => {
     //     return;
     // }
 
-    const createUserCommand = new CreateUser(firstName, lastName, emailAddress);
+    const createUserCommand = new CreateUser(firstName, lastName, emailAddress, password);
     const createUserResponse = await appCore.dispatchQuery(createUserCommand);
     return response.json(createUserResponse);
 

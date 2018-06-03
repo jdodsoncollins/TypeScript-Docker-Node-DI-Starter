@@ -53,6 +53,16 @@ var User = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(User.prototype, "password", {
+        get: function () {
+            return this._password;
+        },
+        set: function (value) {
+            this._password = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     User.prototype.setId = function (id) {
         if (id === null) {
             id = Uuid_1.Uuid.uuid4();
@@ -75,6 +85,10 @@ var User = /** @class */ (function () {
         typeorm_1.Column({ type: 'varchar', nullable: true, name: 'lastName' }),
         __metadata("design:type", String)
     ], User.prototype, "_lastName", void 0);
+    __decorate([
+        typeorm_1.Column({ type: 'varchar', nullable: true, name: 'password' }),
+        __metadata("design:type", String)
+    ], User.prototype, "_password", void 0);
     User = __decorate([
         typeorm_1.Entity('user', { name: 'user' }),
         __metadata("design:paramtypes", [String])
