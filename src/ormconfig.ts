@@ -1,6 +1,7 @@
 import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
 import { resolve } from 'path';
 import { User } from './database/src/DomainModel/User/User';
+import { Oauth } from './database/src/DomainModel/Oauth/Oauth';
 
 const projectRoot = resolve(__dirname, '../');
 
@@ -16,7 +17,8 @@ export class MysqlConnection implements MysqlConnectionOptions {
   readonly logging = true;
   // readonly debug = true;
   readonly entities = [
-    User
+    User,
+    Oauth
   ];
   readonly migrations = [
     projectRoot + '/migration/**/*.ts'

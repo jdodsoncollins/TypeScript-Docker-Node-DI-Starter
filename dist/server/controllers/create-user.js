@@ -38,8 +38,9 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var ApplicationCore_1 = require("../database/src/Infrastructure/Lib/ApplicationCore");
 var CreateUser_1 = require("../database/src/Action/User/CreateUser");
+var bcrypt = require('bcrypt');
 exports.execute = function (req, response) { return __awaiter(_this, void 0, void 0, function () {
-    var firstName, lastName, emailAddress, password, appCore, createUserCommand, createUserResponse;
+    var firstName, lastName, emailAddress, password, appCore, hash, createUserCommand, createUserResponse;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -49,9 +50,22 @@ exports.execute = function (req, response) { return __awaiter(_this, void 0, voi
                 emailAddress = req.body.email;
                 password = req.body.password;
                 appCore = new ApplicationCore_1.ApplicationCore();
-                createUserCommand = new CreateUser_1.CreateUser(firstName, lastName, emailAddress, password);
-                return [4 /*yield*/, appCore.dispatchQuery(createUserCommand)];
+                if (!emailAddress) {
+                    response.status(404);
+                    response.json('Missing email');
+                    return [2 /*return*/];
+                }
+                if (!password) {
+                    response.status(404);
+                    response.json('Missing password');
+                    return [2 /*return*/];
+                }
+                return [4 /*yield*/, bcrypt.hash(password, 16.5)];
             case 1:
+                hash = _a.sent();
+                createUserCommand = new CreateUser_1.CreateUser(firstName, lastName, emailAddress, hash);
+                return [4 /*yield*/, appCore.dispatchQuery(createUserCommand)];
+            case 2:
                 createUserResponse = _a.sent();
                 return [2 /*return*/, response.json(createUserResponse)];
         }

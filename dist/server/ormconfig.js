@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var path_1 = require("path");
 var User_1 = require("./database/src/DomainModel/User/User");
+var Oauth_1 = require("./database/src/DomainModel/Oauth/Oauth");
 var projectRoot = path_1.resolve(__dirname, '../');
 var MysqlConnection = /** @class */ (function () {
     function MysqlConnection() {
@@ -16,7 +17,8 @@ var MysqlConnection = /** @class */ (function () {
         this.logging = true;
         // readonly debug = true;
         this.entities = [
-            User_1.User
+            User_1.User,
+            Oauth_1.Oauth
         ];
         this.migrations = [
             projectRoot + '/migration/**/*.ts'
