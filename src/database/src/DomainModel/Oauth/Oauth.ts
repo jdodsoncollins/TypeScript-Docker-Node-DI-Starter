@@ -8,22 +8,22 @@ export class Oauth implements IEntity {
   private _id: any;
 
   @Column({ type: 'varchar', nullable: false, name: 'access_token' })
-  private _access_token: string;
+  private _accessToken: string;
 
   @Column({ type: 'varchar', nullable: false, name: 'access_token_expires_on' })
-  private _access_token_expires_on: string;
+  private _accessTokenExpiresOn: string;
 
   @Column({ type: 'varchar', nullable: false, name: 'client_id' })
-  private _client_id: string;
+  private _clientId: string;
 
   @Column({ type: 'varchar', nullable: false, name: 'refresh_token' })
-  private _refresh_token: string;
+  private _refreshToken: string;
 
   @Column({ type: 'timestamp', nullable: false, name: 'refresh_token_expires_on' })
-  private _refresh_token_expires_on: string;
+  private _refreshTokenExpiresOn: string;
 
   @Column({ type: 'varchar', nullable: false, name: 'user_id' })
-  private _user_id: string;
+  private _userId: string;
   
   constructor(id:string = null) {
     this.setId(id);
@@ -34,51 +34,51 @@ export class Oauth implements IEntity {
   }
 
   get accessToken(): string {
-    return this._access_token;
+    return this._accessToken;
   }
 
   set accessToken(value: string) {
-    this._access_token = value;
+    this._accessToken = value;
   }
 
   get accessTokenExpiresOn(): string {
-    return this._access_token_expires_on;
+    return this._accessTokenExpiresOn;
   }
 
   set accessTokenExpiresOn(value: string) {
-    this._access_token_expires_on = value;
+    this._accessTokenExpiresOn = value;
   }
 
   get clientId(): string | null {
-    return this._client_id;
+    return this._clientId;
   }
 
   set clientId(value: string | null) {
-    this._client_id = value;
+    this._clientId = value;
   }
 
   get refreshToken(): string | null {
-    return this._refresh_token;
+    return this._refreshToken;
   }
 
   set refreshToken(value: string | null) {
-    this._refresh_token = value;
+    this._refreshToken = value;
   }
 
   get refreshTokenExpiresOn(): string | null {
-    return this._refresh_token_expires_on;
+    return this._refreshTokenExpiresOn;
   }
 
   set refreshTokenExpiresOn(value: string | null) {
-    this._refresh_token_expires_on = value;
+    this._refreshTokenExpiresOn = value;
   }
 
   get userId(): string | null {
-    return this._user_id;
+    return this._userId;
   }
 
   set userId(value: string | null) {
-    this._user_id = value;
+    this._userId = value;
   }
 
   private setId(id: string | null): void {

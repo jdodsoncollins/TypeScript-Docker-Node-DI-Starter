@@ -7,45 +7,61 @@ export class CreateOauth implements ICommand {
   private _oauth: Oauth | null;
 
   constructor(
-    private _firstName: string | null,
-    private _lastName: string | null,
-    private _email: string | null = null,
-    private _password: string | null
+    private _accessToken: string | null,
+    private _accessTokenExpiresOn: string | null,
+    private _clientId: string | null = null,
+    private _refreshToken: string | null,
+    private _refreshTokenExpiresOn: string | null,
+    private _userId: string | null
   ) {
     this._oauth = new Oauth();
-    // if (_firstName) {
-    //   this.setFirstName(_firstName);
-    // }
-    // if (_lastName) {
-    //   this.setLastName(_lastName);
-    // }
-    // if (_email) {
-    //   this.setEmail(_email);
-    // }
-    // if (_password) {
-    //   this.setPassword(_password);
-    // }
+    if (_accessToken) {
+      this.setAccessToken(_accessToken);
+    }
+    if (_accessTokenExpiresOn) {
+      this.setAccessTokenExpiresOn(_accessTokenExpiresOn);
+    }
+    if (_clientId) {
+      this.setClientId(_clientId);
+    }
+    if (_refreshToken) {
+      this.setRefreshToken(_refreshToken);
+    }
+    if (_refreshTokenExpiresOn) {
+      this.setRefreshToken(_refreshTokenExpiresOn);
+    }
+    if (_userId) {
+      this.setRefreshToken(_userId);
+    }
   }
 
   get oauth(): Oauth {
     return this._oauth;
   }
 
-  // private setFirstName(firstName: string) {
-  //     this._oauth.firstName = firstName;
-  // }
+  private setAccessToken(accessToken) {
+    this._oauth.accessToken = accessToken;
+  }
 
-  // private setLastName(lastName: string) {
-  //     this._oauth.lastName = lastName;
-  // }
+  private setAccessTokenExpiresOn(accessTokenExpiresOn) {
+    this._oauth.accessTokenExpiresOn = accessTokenExpiresOn;
+  }
 
-  // private setEmail(email: string) {
-  //   this._oauth.email = email;
-  // }
+  private setClientId(clientId) {
+    this._oauth.clientId = clientId;
+  }
 
-  // private setPassword(password: string) {
-  //   this._oauth.password = password;
-  // }
+  private setRefreshToken(refreshToken) {
+    this._oauth.refreshToken = refreshToken;
+  }
+
+  private setRefreshTokenExpiresOn(refreshTokenExpiresOn) {
+    this._oauth.refreshTokenExpiresOn = refreshTokenExpiresOn;
+  }
+
+  private setUserId(userId) {
+    this._oauth.userId = userId;
+  }
 
   getActionHandler(): IActionHandler {
     return new CreateOauthHandler(this);

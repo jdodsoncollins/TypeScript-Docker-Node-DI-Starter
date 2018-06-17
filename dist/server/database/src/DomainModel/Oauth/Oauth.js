@@ -25,60 +25,60 @@ var Oauth = /** @class */ (function () {
     });
     Object.defineProperty(Oauth.prototype, "accessToken", {
         get: function () {
-            return this._access_token;
+            return this._accessToken;
         },
         set: function (value) {
-            this._access_token = value;
+            this._accessToken = value;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Oauth.prototype, "accessTokenExpiresOn", {
         get: function () {
-            return this._access_token_expires_on;
+            return this._accessTokenExpiresOn;
         },
         set: function (value) {
-            this._access_token_expires_on = value;
+            this._accessTokenExpiresOn = value;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Oauth.prototype, "clientId", {
         get: function () {
-            return this._client_id;
+            return this._clientId;
         },
         set: function (value) {
-            this._client_id = value;
+            this._clientId = value;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Oauth.prototype, "refreshToken", {
         get: function () {
-            return this._refresh_token;
+            return this._refreshToken;
         },
         set: function (value) {
-            this._refresh_token = value;
+            this._refreshToken = value;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Oauth.prototype, "refreshTokenExpiresOn", {
         get: function () {
-            return this._refresh_token_expires_on;
+            return this._refreshTokenExpiresOn;
         },
         set: function (value) {
-            this._refresh_token_expires_on = value;
+            this._refreshTokenExpiresOn = value;
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(Oauth.prototype, "userId", {
         get: function () {
-            return this._user_id;
+            return this._userId;
         },
         set: function (value) {
-            this._user_id = value;
+            this._userId = value;
         },
         enumerable: true,
         configurable: true
@@ -96,27 +96,27 @@ var Oauth = /** @class */ (function () {
     __decorate([
         typeorm_1.Column({ type: 'varchar', nullable: false, name: 'access_token' }),
         __metadata("design:type", String)
-    ], Oauth.prototype, "_access_token", void 0);
+    ], Oauth.prototype, "_accessToken", void 0);
     __decorate([
         typeorm_1.Column({ type: 'varchar', nullable: false, name: 'access_token_expires_on' }),
         __metadata("design:type", String)
-    ], Oauth.prototype, "_access_token_expires_on", void 0);
+    ], Oauth.prototype, "_accessTokenExpiresOn", void 0);
     __decorate([
         typeorm_1.Column({ type: 'varchar', nullable: false, name: 'client_id' }),
         __metadata("design:type", String)
-    ], Oauth.prototype, "_client_id", void 0);
+    ], Oauth.prototype, "_clientId", void 0);
     __decorate([
         typeorm_1.Column({ type: 'varchar', nullable: false, name: 'refresh_token' }),
         __metadata("design:type", String)
-    ], Oauth.prototype, "_refresh_token", void 0);
+    ], Oauth.prototype, "_refreshToken", void 0);
     __decorate([
         typeorm_1.Column({ type: 'timestamp', nullable: false, name: 'refresh_token_expires_on' }),
         __metadata("design:type", String)
-    ], Oauth.prototype, "_refresh_token_expires_on", void 0);
+    ], Oauth.prototype, "_refreshTokenExpiresOn", void 0);
     __decorate([
         typeorm_1.Column({ type: 'varchar', nullable: false, name: 'user_id' }),
         __metadata("design:type", String)
-    ], Oauth.prototype, "_user_id", void 0);
+    ], Oauth.prototype, "_userId", void 0);
     Oauth = __decorate([
         typeorm_1.Entity('Oauth', { name: 'Oauth' }),
         __metadata("design:paramtypes", [String])

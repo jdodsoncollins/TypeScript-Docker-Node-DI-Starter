@@ -44,10 +44,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var GetOauth_1 = require("./../../Action/Oauth/GetOauth");
 require("reflect-metadata");
 var typedi_1 = require("typedi");
-var OauthRepository_1 = require("database/src/Infrastructure/Repository/OauthRepository");
-var GetOauth_1 = require("../../Action/Oauth/GetOauth");
+var OauthRepository_1 = require("../../Infrastructure/Repository/OauthRepository");
 var GetOauthHandler = /** @class */ (function () {
     function GetOauthHandler(command) {
         this.command = command;
@@ -56,6 +56,10 @@ var GetOauthHandler = /** @class */ (function () {
     GetOauthHandler.prototype.execute = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
+                console.log('command', this.command);
+                if (this.command.accessToken) {
+                    return [2 /*return*/, this.oAuthRepository.getByAccessToken(this.command.accessToken)];
+                }
                 return [2 /*return*/];
             });
         });

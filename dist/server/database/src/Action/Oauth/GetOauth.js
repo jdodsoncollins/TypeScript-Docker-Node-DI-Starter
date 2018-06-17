@@ -2,18 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var GetOauthHandler_1 = require("../../ActionHandler/Oauth/GetOauthHandler");
 var GetOauth = /** @class */ (function () {
-    function GetOauth(_userId, _email) {
-        if (_userId === void 0) { _userId = null; }
-        if (_email === void 0) { _email = null; }
-        this._userId = _userId;
-        this._email = _email;
+    function GetOauth(_accessToken) {
+        if (_accessToken === void 0) { _accessToken = null; }
+        this._accessToken = _accessToken;
     }
-    // get userId(): string {
-    //   return this._userId;
-    // }
-    // get email(): string {
-    //     return this._email;
-    // }
+    Object.defineProperty(GetOauth.prototype, "accessToken", {
+        get: function () {
+            return this._accessToken;
+        },
+        enumerable: true,
+        configurable: true
+    });
     GetOauth.prototype.getActionHandler = function () {
         return new GetOauthHandler_1.GetOauthHandler(this);
     };

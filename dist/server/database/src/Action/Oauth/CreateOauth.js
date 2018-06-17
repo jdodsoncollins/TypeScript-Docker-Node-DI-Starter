@@ -3,25 +3,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Oauth_1 = require("../../DomainModel/Oauth/Oauth");
 var CreateOauthHandler_1 = require("../../ActionHandler/Oauth/CreateOauthHandler");
 var CreateOauth = /** @class */ (function () {
-    function CreateOauth(_firstName, _lastName, _email, _password) {
-        if (_email === void 0) { _email = null; }
-        this._firstName = _firstName;
-        this._lastName = _lastName;
-        this._email = _email;
-        this._password = _password;
+    function CreateOauth(_accessToken, _accessTokenExpiresOn, _clientId, _refreshToken, _refreshTokenExpiresOn, _userId) {
+        if (_clientId === void 0) { _clientId = null; }
+        this._accessToken = _accessToken;
+        this._accessTokenExpiresOn = _accessTokenExpiresOn;
+        this._clientId = _clientId;
+        this._refreshToken = _refreshToken;
+        this._refreshTokenExpiresOn = _refreshTokenExpiresOn;
+        this._userId = _userId;
         this._oauth = new Oauth_1.Oauth();
-        // if (_firstName) {
-        //   this.setFirstName(_firstName);
-        // }
-        // if (_lastName) {
-        //   this.setLastName(_lastName);
-        // }
-        // if (_email) {
-        //   this.setEmail(_email);
-        // }
-        // if (_password) {
-        //   this.setPassword(_password);
-        // }
+        if (_accessToken) {
+            this.setAccessToken(_accessToken);
+        }
+        if (_accessTokenExpiresOn) {
+            this.setAccessTokenExpiresOn(_accessTokenExpiresOn);
+        }
+        if (_clientId) {
+            this.setClientId(_clientId);
+        }
+        if (_refreshToken) {
+            this.setRefreshToken(_refreshToken);
+        }
+        if (_refreshTokenExpiresOn) {
+            this.setRefreshToken(_refreshTokenExpiresOn);
+        }
+        if (_userId) {
+            this.setRefreshToken(_userId);
+        }
     }
     Object.defineProperty(CreateOauth.prototype, "oauth", {
         get: function () {
@@ -30,18 +38,24 @@ var CreateOauth = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    // private setFirstName(firstName: string) {
-    //     this._oauth.firstName = firstName;
-    // }
-    // private setLastName(lastName: string) {
-    //     this._oauth.lastName = lastName;
-    // }
-    // private setEmail(email: string) {
-    //   this._oauth.email = email;
-    // }
-    // private setPassword(password: string) {
-    //   this._oauth.password = password;
-    // }
+    CreateOauth.prototype.setAccessToken = function (accessToken) {
+        this._oauth.accessToken = accessToken;
+    };
+    CreateOauth.prototype.setAccessTokenExpiresOn = function (accessTokenExpiresOn) {
+        this._oauth.accessTokenExpiresOn = accessTokenExpiresOn;
+    };
+    CreateOauth.prototype.setClientId = function (clientId) {
+        this._oauth.clientId = clientId;
+    };
+    CreateOauth.prototype.setRefreshToken = function (refreshToken) {
+        this._oauth.refreshToken = refreshToken;
+    };
+    CreateOauth.prototype.setRefreshTokenExpiresOn = function (refreshTokenExpiresOn) {
+        this._oauth.refreshTokenExpiresOn = refreshTokenExpiresOn;
+    };
+    CreateOauth.prototype.setUserId = function (userId) {
+        this._oauth.userId = userId;
+    };
     CreateOauth.prototype.getActionHandler = function () {
         return new CreateOauthHandler_1.CreateOauthHandler(this);
     };
