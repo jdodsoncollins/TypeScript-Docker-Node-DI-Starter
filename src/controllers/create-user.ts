@@ -14,14 +14,12 @@ export let execute = async (req: Request, response: Response) => {
 
     if (!emailAddress) {
         response.status(404);
-        response.json('Missing email');
-        return;
+        return response.json('Missing email');;
     }
 
     if (!password) {
         response.status(404);
-        response.json('Missing password');
-        return;
+        return response.json('Missing password');;
     }
 
     const hash = await bcrypt.hash(password, 16.5);

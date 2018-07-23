@@ -1,13 +1,4 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -43,32 +34,28 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var GetOauth_1 = require("./../../Action/Oauth/GetOauth");
-require("reflect-metadata");
-var typedi_1 = require("typedi");
-var OauthRepository_1 = require("../../Infrastructure/Repository/OauthRepository");
-var GetOauthHandler = /** @class */ (function () {
-    function GetOauthHandler(command) {
-        this.command = command;
-        this.oAuthRepository = typedi_1.Container.get(OauthRepository_1.OauthRepository);
-    }
-    GetOauthHandler.prototype.execute = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log('command', this.command);
-                if (this.command.accessToken) {
-                    return [2 /*return*/, this.oAuthRepository.getByAccessToken(this.command.accessToken)];
+var GetUser_1 = require("../database/src/Action/User/GetUser");
+var ApplicationCore_1 = require("../database/src/Infrastructure/Lib/ApplicationCore");
+exports.execute = function (req, response) { return __awaiter(_this, void 0, void 0, function () {
+    var id, appCore, getUserCommand, getUserResponse;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                id = req.query.id;
+                appCore = new ApplicationCore_1.ApplicationCore();
+                if (!id) {
+                    response.status(404);
+                    response.json('User Not Found [242b]');
+                    return [2 /*return*/];
                 }
-                return [2 /*return*/];
-            });
-        });
-    };
-    GetOauthHandler = __decorate([
-        typedi_1.Service(),
-        __metadata("design:paramtypes", [GetOauth_1.GetOauth])
-    ], GetOauthHandler);
-    return GetOauthHandler;
-}());
-exports.GetOauthHandler = GetOauthHandler;
-//# sourceMappingURL=GetOauthHandler.js.map
+                getUserCommand = new GetUser_1.GetUser(id);
+                return [4 /*yield*/, appCore.dispatchQuery(getUserCommand)];
+            case 1:
+                getUserResponse = _a.sent();
+                return [2 /*return*/, response.json(getUserResponse)];
+        }
+    });
+}); };
+//# sourceMappingURL=token.js.map

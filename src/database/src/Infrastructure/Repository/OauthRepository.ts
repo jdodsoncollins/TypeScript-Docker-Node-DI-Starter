@@ -1,4 +1,4 @@
-import { Oauth } from "./../../DomainModel/Oauth/Oauth";
+import { OAuthAccessTokens } from "../../DomainModel/Oauth/OAuth_access_tokens";
 import {
   Connection,
   Repository,
@@ -35,27 +35,27 @@ export class OauthRepository implements OauthRepository {
     this._entityManager = entityManager;
   }
 
-  public createOauth(oauth: Oauth) {
-    return this._connection.manager.save(oauth);
+  public createOauthAccessToken(oAuthAccessToken: OAuthAccessTokens) {
+    return this._connection.manager.save(oAuthAccessToken);
   }
 
-  public getById(id: string | Array<string>): Promise<Oauth[]> {
+  public getById(id: string | Array<string>): Promise<OAuthAccessTokens[]> {
     let idArray: string | Array<string> = [];
     if (id instanceof Array) {
       idArray = id;
     } else {
       idArray.push(id);
     }
-    return this._connection.getRepository(Oauth).findByIds(idArray);
+    return this._connection.getRepository(OAuthAccessTokens).findByIds(idArray);
   }
 
-  public getByUserId(userId: string): Promise<Oauth[]> {
-    return this._connection.getRepository(Oauth).find({ userId: userId });
+  public getByUserId(userId: string): Promise<OAuthAccessTokens[]> {
+    return this._connection.getRepository(OAuthAccessTokens).find({ userId: userId });
   }
 
-  public getByAccessToken(accessToken: string): Promise<Oauth[]> {
-    return this._connection
-      .getRepository(Oauth)
-      .find({ accessToken: accessToken });
-  }
+  // public getByAccessToken(identifier: string): Promise<OAuthAccessTokens[]> {
+  //   return this._connection
+  //     .getRepository(OAuthAccessTokens)
+  //     .find({ identifier: identifier });
+  // }
 }

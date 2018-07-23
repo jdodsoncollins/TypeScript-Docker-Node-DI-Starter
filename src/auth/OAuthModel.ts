@@ -1,6 +1,7 @@
-import { GetUser } from "database/src/Action/User/GetUser";
 import { ApplicationCore } from "../database/src/Infrastructure/Lib/ApplicationCore";
-import { User } from "database/src/DomainModel/User/User";
+import { User } from "../database/src/DomainModel/User/User";
+import { OAuthAccessTokens } from "../database/src/DomainModel/Oauth/OAuth_access_tokens";
+import { GetOauthAccessToken } from "../database/src/Action/Oauth/GetOauthAccessToken";
 const bcrypt = require("bcrypt");
 var _ = require('lodash');
 
@@ -13,7 +14,7 @@ export class OAuthModel {
   }
 
   // getAccessToken(bearerToken) {
-  //   return OAuthAccessToken.findOne({
+  //   return OAuthAccessTokens.findOne({
   //     where: { access_token: bearerToken },
   //     attributes: [
   //       ["access_token", "accessToken"],

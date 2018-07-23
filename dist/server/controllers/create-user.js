@@ -52,13 +52,13 @@ exports.execute = function (req, response) { return __awaiter(_this, void 0, voi
                 appCore = new ApplicationCore_1.ApplicationCore();
                 if (!emailAddress) {
                     response.status(404);
-                    response.json('Missing email');
-                    return [2 /*return*/];
+                    return [2 /*return*/, response.json('Missing email')];
+                    ;
                 }
                 if (!password) {
                     response.status(404);
-                    response.json('Missing password');
-                    return [2 /*return*/];
+                    return [2 /*return*/, response.json('Missing password')];
+                    ;
                 }
                 return [4 /*yield*/, bcrypt.hash(password, 16.5)];
             case 1:

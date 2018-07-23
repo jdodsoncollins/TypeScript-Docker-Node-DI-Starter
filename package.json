@@ -1,12 +1,6 @@
 {
   "name": "TS-mySQL-server",
   "version": "0.1.0",
-  "authors": [
-    "Jason Raimondi <jason@raimondi.us>",
-    "Kyle Conkright <kyleconkright@gmail.com>",
-    "Jeremy Collins <jeremy@jeremycollins.net>"
-  ],
-  "description": "An Angular starter project",
   "scripts": {
     "build:dev": "npm run server:dev",
     "build:prelive": "npm run server:prelive",
@@ -22,15 +16,17 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "base64url": "^3.0.0",
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
     "bson": "^1.0.4",
     "compression": "^1.7.1",
     "core-js": "^2.5.3",
     "cors": "^2.8.4",
+    "crypto-js": "^3.1.9-1",
     "express": "^4.16.2",
     "helmet": "^3.10.0",
-    "jsonwebtoken": "^8.2.2",
+    "jsonwebtoken": "^8.3.0",
     "morgan": "^1.9.0",
     "mysql": "^2.15.0",
     "oauth2-server": "3.0",

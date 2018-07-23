@@ -2,7 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var path_1 = require("path");
 var User_1 = require("./database/src/DomainModel/User/User");
-var Oauth_1 = require("./database/src/DomainModel/Oauth/Oauth");
+var OAuth_access_tokens_1 = require("./database/src/DomainModel/Oauth/OAuth_access_tokens");
+var Oauth_access_token_scopes_1 = require("./database/src/DomainModel/Oauth/Oauth_access_token_scopes");
+var OAuth_client_1 = require("./database/src/DomainModel/Oauth/OAuth_client");
+var OAuth_refresh_tokens_1 = require("./database/src/DomainModel/Oauth/OAuth_refresh_tokens");
+var OAuth_scopes_1 = require("./database/src/DomainModel/Oauth/OAuth_scopes");
 var projectRoot = path_1.resolve(__dirname, '../');
 var MysqlConnection = /** @class */ (function () {
     function MysqlConnection() {
@@ -18,7 +22,11 @@ var MysqlConnection = /** @class */ (function () {
         // readonly debug = true;
         this.entities = [
             User_1.User,
-            Oauth_1.Oauth
+            Oauth_access_token_scopes_1.OAuthAccessTokenScopes,
+            OAuth_access_tokens_1.OAuthAccessTokens,
+            OAuth_client_1.OAuthClient,
+            OAuth_refresh_tokens_1.OAuthRefreshTokens,
+            OAuth_scopes_1.OAuthScopes
         ];
         this.migrations = [
             projectRoot + '/migration/**/*.ts'

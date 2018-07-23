@@ -37,21 +37,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 var typedi_1 = require("typedi");
-var OauthRepository_1 = require("database/src/Infrastructure/Repository/OauthRepository");
-var CreateOauthHandler = /** @class */ (function () {
-    function CreateOauthHandler(command) {
+var OauthRepository_1 = require("../../Infrastructure/Repository/OauthRepository");
+var CreateOauthAccessTokenHandler = /** @class */ (function () {
+    function CreateOauthAccessTokenHandler(command) {
         this.command = command;
         this.oAuthRepository = typedi_1.Container.get(OauthRepository_1.OauthRepository);
     }
-    CreateOauthHandler.prototype.execute = function () {
+    CreateOauthAccessTokenHandler.prototype.execute = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 console.log(this.command);
-                return [2 /*return*/, this.oAuthRepository.createOauth(this.command.oauth)];
+                return [2 /*return*/, this.oAuthRepository.createOauthAccessToken(this.command.oAuthAccessToken)];
             });
         });
     };
-    return CreateOauthHandler;
+    return CreateOauthAccessTokenHandler;
 }());
-exports.CreateOauthHandler = CreateOauthHandler;
-//# sourceMappingURL=CreateOauthHandler.js.map
+exports.CreateOauthAccessTokenHandler = CreateOauthAccessTokenHandler;
+//# sourceMappingURL=CreateOauthAccessTokenHandler.js.map

@@ -47,8 +47,8 @@ exports.execute = function (req, response) { return __awaiter(_this, void 0, voi
                 appCore = new ApplicationCore_1.ApplicationCore();
                 if (!emailAddress) {
                     response.status(404);
-                    response.json('Email Not Found [242b]');
-                    return [2 /*return*/];
+                    return [2 /*return*/, response.json('Email Not Found [242b]')];
+                    ;
                 }
                 getUserCommand = new GetUser_1.GetUser(null, emailAddress);
                 return [4 /*yield*/, appCore.dispatchQuery(getUserCommand)];

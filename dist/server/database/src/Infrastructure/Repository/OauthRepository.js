@@ -12,7 +12,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Oauth_1 = require("./../../DomainModel/Oauth/Oauth");
+var OAuth_access_tokens_1 = require("../../DomainModel/Oauth/OAuth_access_tokens");
 var typeorm_1 = require("typeorm");
 require("reflect-metadata");
 var typedi_1 = require("typedi");
@@ -24,8 +24,8 @@ var OauthRepository = /** @class */ (function () {
         this._connection = connection;
         this._entityManager = entityManager;
     }
-    OauthRepository.prototype.createOauth = function (oauth) {
-        return this._connection.manager.save(oauth);
+    OauthRepository.prototype.createOauthAccessToken = function (oAuthAccessToken) {
+        return this._connection.manager.save(oAuthAccessToken);
     };
     OauthRepository.prototype.getById = function (id) {
         var idArray = [];
@@ -35,15 +35,10 @@ var OauthRepository = /** @class */ (function () {
         else {
             idArray.push(id);
         }
-        return this._connection.getRepository(Oauth_1.Oauth).findByIds(idArray);
+        return this._connection.getRepository(OAuth_access_tokens_1.OAuthAccessTokens).findByIds(idArray);
     };
     OauthRepository.prototype.getByUserId = function (userId) {
-        return this._connection.getRepository(Oauth_1.Oauth).find({ userId: userId });
-    };
-    OauthRepository.prototype.getByAccessToken = function (accessToken) {
-        return this._connection
-            .getRepository(Oauth_1.Oauth)
-            .find({ accessToken: accessToken });
+        return this._connection.getRepository(OAuth_access_tokens_1.OAuthAccessTokens).find({ userId: userId });
     };
     OauthRepository = __decorate([
         typedi_1.Service(),

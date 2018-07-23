@@ -12,6 +12,8 @@ To get started
 `npm install`
 `cd docker && docker-compose up`
 
+Next, generate a `keys.env` file, where variables such as `process.env.SECRET` can be pulled from. See `keys.env.tmpl` for the template.
+
 Then...
 `npm run test`
 

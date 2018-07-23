@@ -39,6 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var GetUser_1 = require("../database/src/Action/User/GetUser");
 var ApplicationCore_1 = require("../database/src/Infrastructure/Lib/ApplicationCore");
 var OAuthModel_1 = require("../auth/OAuthModel");
+var jsonwebtoken_1 = require("jsonwebtoken");
 var bcrypt = require("bcrypt");
 var oAuthServer = require("oauth2-server");
 var oAuthModel = new OAuthModel_1.OAuthModel();
@@ -76,12 +77,15 @@ exports.execute = function (req, response) { return __awaiter(_this, void 0, voi
                     return [2 /*return*/, oAuth
                             .authorize(request, response)
                             .then(function (success) {
-                            response.json(success);
                             console.log(response.json(success));
+                            var userJwt = jsonwebtoken_1.jwt.sign({
+                                data: emailAddress
+                            }, process.env.SECRET, { expiresIn: '1h' });
+                            return response.json({ msg: success, jwt: userJwt });
                         })
                             .catch(function (err) {
-                            response.status(err.code || 500).json(err);
                             console.log(response.status(err.code || 500).json(err));
+                            return response.status(err.code || 500).json(err);
                         })];
                     // return response.json(getUserResponse);
                 }

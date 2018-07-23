@@ -2,7 +2,6 @@ import "reflect-metadata";
 
 import { Connection, createConnection, useContainer } from 'typeorm';
 import { MysqlConnection } from '../ormconfig';
-import { User } from '../database/src/DomainModel/User/User';
 import { CreateUser } from '../database/src/Action/User/CreateUser';
 import { ApplicationCore } from '../database/src/Infrastructure/Lib/ApplicationCore';
 import { Container } from 'typedi';

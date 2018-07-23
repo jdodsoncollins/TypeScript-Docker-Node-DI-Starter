@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import { GetUser } from "../database/src/Action/User/GetUser";
 import { ApplicationCore } from "../database/src/Infrastructure/Lib/ApplicationCore";
 import { OAuthModel } from "../auth/OAuthModel";
+import { jwt } from "jsonwebtoken";
+import { HMACSHA256 } from "crypto-js";
+import { base64url } from "base64url";
 const bcrypt = require("bcrypt");
 const oAuthServer = require("oauth2-server");
 const oAuthModel = new OAuthModel();
@@ -36,12 +39,17 @@ export let execute = async (req: Request, response: Response) => {
     return oAuth
       .authorize(request, response)
       .then(function(success) {
-        response.json(success);
         console.log(response.json(success));
+
+        const userJwt = jwt.sign({
+          data: emailAddress
+        }, process.env.SECRET, { expiresIn: '1h' });
+
+        return response.json({msg: success, jwt: userJwt});
       })
       .catch(function(err) {
-        response.status(err.code || 500).json(err);
         console.log(response.status(err.code || 500).json(err));
+        return response.status(err.code || 500).json(err);
       });
     // return response.json(getUserResponse);
   }

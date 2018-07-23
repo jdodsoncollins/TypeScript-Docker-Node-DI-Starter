@@ -8,8 +8,7 @@ export let execute = async (req: Request, response: Response) => {
 
     if (!emailAddress) {
         response.status(404);
-        response.json('Email Not Found [242b]');
-        return;
+        return response.json('Email Not Found [242b]');;
     }
 
     const getUserCommand = new GetUser(null, emailAddress);
