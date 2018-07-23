@@ -13,12 +13,12 @@ To get started
 `npm install`
 `cd docker && docker-compose up`
 
-Next, generate a `keys.env` file, where variables such as `process.env.SECRET` can be pulled from. See `keys.env.tmpl` for the template.
+Next, generate a `.env` file, where variables such as `process.env.SECRET` can be pulled from. See `.env.tmpl` for the template.
 
 Then...
 `npm run test`
 
-Additionally, you can check the `getUser` endpoint by hitting the URLs such as `/user?id=1234`. `localhost:3000/login` is also set up to be a demo login page.
+Additionally, you can check the `getUser` endpoint by hitting the URLs such as `/user?id=1234`. `localhost:3000/login` is also set up to be a demo login page that returns a JSON web token and console logs some user data.
 
 Read more on [CQRS](https://martinfowler.com/bliki/CQRS.html)
 
