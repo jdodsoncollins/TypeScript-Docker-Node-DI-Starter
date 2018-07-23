@@ -9,7 +9,6 @@ var createUser = require("./controllers/create-user");
 var checkUser = require("./controllers/check-user");
 var route_definitions_constant_1 = require("./routing/route-definitions.constant");
 require("reflect-metadata");
-// Create & Set Express server
 var app = express();
 var bodyParser = require('body-parser');
 var corsOptions = { origin: function (origin, callback) {
@@ -36,6 +35,6 @@ app.get('/profile', function (req, res) {
 });
 app.get(route_definitions_constant_1.RouteDefinitions['user'], getUser.execute);
 app.post(route_definitions_constant_1.RouteDefinitions['user.create'], createUser.execute);
-app.post(route_definitions_constant_1.RouteDefinitions['user.login'], checkUser.execute);
+app.post(route_definitions_constant_1.RouteDefinitions['user.auth'], checkUser.execute);
 module.exports = app;
 //# sourceMappingURL=app.js.map

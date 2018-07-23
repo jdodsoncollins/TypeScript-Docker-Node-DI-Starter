@@ -38,18 +38,13 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var GetUser_1 = require("../database/src/Action/User/GetUser");
 var ApplicationCore_1 = require("../database/src/Infrastructure/Lib/ApplicationCore");
-var OAuthModel_1 = require("../auth/OAuthModel");
-var jsonwebtoken_1 = require("jsonwebtoken");
+var jwt = require("jsonwebtoken");
 var bcrypt = require("bcrypt");
 var oAuthServer = require("oauth2-server");
-var oAuthModel = new OAuthModel_1.OAuthModel();
 var Request = oAuthServer.Request;
 var Response = oAuthServer.Response;
-var oAuth = new oAuthServer({
-    model: oAuthModel
-});
-exports.execute = function (req, response) { return __awaiter(_this, void 0, void 0, function () {
-    var emailAddress, password, appCore, getUserCommand, getUserResponse, match, request;
+exports.execute = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    var emailAddress, password, appCore, getUserCommand, getUserResponse, match, userJwt;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -58,8 +53,8 @@ exports.execute = function (req, response) { return __awaiter(_this, void 0, voi
                 console.log(emailAddress, password);
                 appCore = new ApplicationCore_1.ApplicationCore();
                 if (!emailAddress || !password) {
-                    response.status(404);
-                    response.json("Missing Email or Password");
+                    res.status(404);
+                    res.json("Missing Email or Password");
                     return [2 /*return*/];
                 }
                 getUserCommand = new GetUser_1.GetUser(null, emailAddress);
@@ -71,26 +66,15 @@ exports.execute = function (req, response) { return __awaiter(_this, void 0, voi
             case 2:
                 match = _a.sent();
                 if (match) {
-                    console.log(match);
-                    request = new Request(req);
-                    response = new Response(response);
-                    return [2 /*return*/, oAuth
-                            .authorize(request, response)
-                            .then(function (success) {
-                            console.log(response.json(success));
-                            var userJwt = jsonwebtoken_1.jwt.sign({
-                                data: emailAddress
-                            }, process.env.SECRET, { expiresIn: '1h' });
-                            return response.json({ msg: success, jwt: userJwt });
-                        })
-                            .catch(function (err) {
-                            console.log(response.status(err.code || 500).json(err));
-                            return response.status(err.code || 500).json(err);
-                        })];
-                    // return response.json(getUserResponse);
+                    console.log('found a match');
+                    userJwt = jwt.sign({
+                        data: emailAddress
+                    }, process.env.SECRET, { expiresIn: '1h' });
+                    console.log(userJwt);
+                    return [2 /*return*/, res.json({ msg: 'success', jwt: userJwt })];
                 }
-                return [2 /*return*/, response.json("Incorrect Password")];
+                return [2 /*return*/, res.json("Incorrect Password")];
         }
     });
-}); var response; };
+}); };
 //# sourceMappingURL=check-user.js.map

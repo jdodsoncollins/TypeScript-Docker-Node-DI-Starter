@@ -7,6 +7,7 @@ This is a starter back-end project that incorporates the following
 - MySQL docker container
 - [TypeORM](https://github.com/typeorm/typeorm) for MySQL interfacing
 - Dependency Injection via [TypeDI](https://github.com/typestack/typedi)
+- Partial implementation of Oauth (this is a work in progress but does not interfere with base functionality above)
 
 To get started
 `npm install`
@@ -17,7 +18,7 @@ Next, generate a `keys.env` file, where variables such as `process.env.SECRET` c
 Then...
 `npm run test`
 
-Additionally, you can check the `getUser` endpoint by hitting the URLs such as `/user?id=1234`
+Additionally, you can check the `getUser` endpoint by hitting the URLs such as `/user?id=1234`. `localhost:3000/login` is also set up to be a demo login page.
 
 Read more on [CQRS](https://martinfowler.com/bliki/CQRS.html)
 

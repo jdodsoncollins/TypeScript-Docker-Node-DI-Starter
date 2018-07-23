@@ -42,6 +42,7 @@ var ormconfig_1 = require("./ormconfig");
 require("reflect-metadata");
 var typedi_1 = require("typedi");
 var ApplicationCore_1 = require("./database/src/Infrastructure/Lib/ApplicationCore");
+require('dotenv').config();
 typeorm_1.useContainer(typedi_1.Container);
 typeorm_1.createConnection(ormconfig_1.MysqlConnection.connect()).then(function (connection) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {

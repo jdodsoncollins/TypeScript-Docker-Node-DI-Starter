@@ -8,6 +8,7 @@ import { Container } from "typedi";
 import { UserRepository } from './database/src/Infrastructure/Repository/UserRepository';
 import { ApplicationCore } from './database/src/Infrastructure/Lib/ApplicationCore';
 import { CreateUser } from './database/src/Action/User/CreateUser';
+require('dotenv').config();
 
 useContainer(Container);
 createConnection(

@@ -1,20 +1,15 @@
 import { Request, Response } from "express";
 import { GetUser } from "../database/src/Action/User/GetUser";
 import { ApplicationCore } from "../database/src/Infrastructure/Lib/ApplicationCore";
-import { OAuthModel } from "../auth/OAuthModel";
-import { jwt } from "jsonwebtoken";
+import * as jwt from "jsonwebtoken";
 import { HMACSHA256 } from "crypto-js";
 import { base64url } from "base64url";
 const bcrypt = require("bcrypt");
 const oAuthServer = require("oauth2-server");
-const oAuthModel = new OAuthModel();
 const Request = oAuthServer.Request;
 const Response = oAuthServer.Response;
-const oAuth = new oAuthServer({
-  model: oAuthModel
-});
 
-export let execute = async (req: Request, response: Response) => {
+export let execute = async (req: Request, res: Response) => {
   const emailAddress = req.body.user;
   const password = req.body.password;
   console.log(emailAddress, password);
@@ -22,8 +17,8 @@ export let execute = async (req: Request, response: Response) => {
   const appCore = new ApplicationCore();
 
   if (!emailAddress || !password) {
-    response.status(404);
-    response.json("Missing Email or Password");
+    res.status(404);
+    res.json("Missing Email or Password");
     return;
   }
 
@@ -32,26 +27,14 @@ export let execute = async (req: Request, response: Response) => {
   console.log("RES", getUserResponse[0]["_password"]);
   const match = await bcrypt.compare(password, getUserResponse[0]["_password"]);
   if (match) {
-    console.log(match);
-    var request = new Request(req);
-    var response = new Response(response);
+    console.log('found a match');
 
-    return oAuth
-      .authorize(request, response)
-      .then(function(success) {
-        console.log(response.json(success));
+    const userJwt = jwt.sign({
+      data: emailAddress
+    }, process.env.SECRET, { expiresIn: '1h' });
 
-        const userJwt = jwt.sign({
-          data: emailAddress
-        }, process.env.SECRET, { expiresIn: '1h' });
-
-        return response.json({msg: success, jwt: userJwt});
-      })
-      .catch(function(err) {
-        console.log(response.status(err.code || 500).json(err));
-        return response.status(err.code || 500).json(err);
-      });
-    // return response.json(getUserResponse);
+    console.log('your JWT is', userJwt)
+    return res.json({msg: 'success', jwt: userJwt});
   }
-  return response.json("Incorrect Password");
+  return res.json("Incorrect Password");
 };

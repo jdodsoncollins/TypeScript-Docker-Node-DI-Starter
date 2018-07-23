@@ -7,12 +7,9 @@ import "reflect-metadata";
 import * as getUser from './controllers/get-user';
 import * as createUser from './controllers/create-user';
 import * as checkUser from './controllers/check-user';
-
 import { RouteDefinitions } from './routing/route-definitions.constant';
-
 import "reflect-metadata";
 
-// Create & Set Express server
 const app = express();
 const bodyParser = require('body-parser');
 const corsOptions = { origin: (origin: string, callback) => {
@@ -40,6 +37,6 @@ app.get('/profile', (req, res) => {
 });
 app.get(RouteDefinitions['user'], getUser.execute);
 app.post(RouteDefinitions['user.create'], createUser.execute);
-app.post(RouteDefinitions['user.login'], checkUser.execute);
+app.post(RouteDefinitions['user.auth'], checkUser.execute);
 
 module.exports = app;
