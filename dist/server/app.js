@@ -6,7 +6,7 @@ var cors = require("cors");
 require("reflect-metadata");
 var getUser = require("./controllers/get-user");
 var createUser = require("./controllers/create-user");
-var checkUser = require("./controllers/check-user");
+var getOAuthAccess = require("./controllers/get-oauth-access");
 var route_definitions_constant_1 = require("./routing/route-definitions.constant");
 require("reflect-metadata");
 var app = express();
@@ -35,6 +35,7 @@ app.get('/profile', function (req, res) {
 });
 app.get(route_definitions_constant_1.RouteDefinitions['user'], getUser.execute);
 app.post(route_definitions_constant_1.RouteDefinitions['user.create'], createUser.execute);
-app.post(route_definitions_constant_1.RouteDefinitions['user.auth'], checkUser.execute);
+app.post(route_definitions_constant_1.RouteDefinitions['user.auth'], createUser.execute);
+app.post(route_definitions_constant_1.RouteDefinitions['user.auth'], getOAuthAccess.execute);
 module.exports = app;
 //# sourceMappingURL=app.js.map

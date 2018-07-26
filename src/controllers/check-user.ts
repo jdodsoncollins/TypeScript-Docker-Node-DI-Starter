@@ -33,8 +33,10 @@ export let execute = async (req: Request, res: Response) => {
       data: emailAddress
     }, process.env.SECRET, { expiresIn: '1h' });
 
-    console.log('your JWT is', userJwt)
-    return res.json({msg: 'success', jwt: userJwt});
+    console.log('your JWT is', userJwt);
+    // save to auth codes
+    // return res.json({msg: 'success', jwt: userJwt});
+    return res.redirect(301, '/auth?clientId=test123&code='+ userJwt);
   }
   return res.json("Incorrect Password");
 };

@@ -70,8 +70,10 @@ exports.execute = function (req, res) { return __awaiter(_this, void 0, void 0, 
                     userJwt = jwt.sign({
                         data: emailAddress
                     }, process.env.SECRET, { expiresIn: '1h' });
-                    console.log(userJwt);
-                    return [2 /*return*/, res.json({ msg: 'success', jwt: userJwt })];
+                    console.log('your JWT is', userJwt);
+                    // save to auth codes
+                    // return res.json({msg: 'success', jwt: userJwt});
+                    return [2 /*return*/, res.redirect(301, '/auth?clientId=test123&code=' + userJwt)];
                 }
                 return [2 /*return*/, res.json("Incorrect Password")];
         }

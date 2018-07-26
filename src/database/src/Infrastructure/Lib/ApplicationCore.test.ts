@@ -3,7 +3,7 @@ import { ApplicationCore } from './ApplicationCore';
 import { GetUser } from '../../Action/User/GetUser';
 import { Connection, ConnectionManager, createConnection, useContainer } from 'typeorm';
 import "reflect-metadata";
-import { MysqlConnection } from '../../../../ormconfig';
+import { MysqlConnection } from 'ormconfig';
 const connection = new Connection(MysqlConnection.connect());
 const app = new ApplicationCore();
 

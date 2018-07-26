@@ -7,6 +7,7 @@ import "reflect-metadata";
 import * as getUser from './controllers/get-user';
 import * as createUser from './controllers/create-user';
 import * as checkUser from './controllers/check-user';
+import * as getOAuthAccess from './controllers/get-oauth-access';
 import { RouteDefinitions } from './routing/route-definitions.constant';
 import "reflect-metadata";
 
@@ -37,6 +38,7 @@ app.get('/profile', (req, res) => {
 });
 app.get(RouteDefinitions['user'], getUser.execute);
 app.post(RouteDefinitions['user.create'], createUser.execute);
-app.post(RouteDefinitions['user.auth'], checkUser.execute);
+app.post(RouteDefinitions['user.auth'], createUser.execute);
+app.post(RouteDefinitions['user.auth'], getOAuthAccess.execute);
 
 module.exports = app;

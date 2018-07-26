@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var ApplicationCore_1 = require("./ApplicationCore");
 var typeorm_1 = require("typeorm");
 require("reflect-metadata");
-var ormconfig_1 = require("../../../../ormconfig");
+var ormconfig_1 = require("ormconfig");
 var connection = new typeorm_1.Connection(ormconfig_1.MysqlConnection.connect());
 var app = new ApplicationCore_1.ApplicationCore();
 /*

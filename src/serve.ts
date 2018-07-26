@@ -1,4 +1,4 @@
-import { User } from 'database/src/DomainModel/User/User';
+import { User } from './database/src/DomainModel/User/User';
 
 const app = require('./app');
 import { Connection, ConnectionManager, createConnection, useContainer } from 'typeorm';
