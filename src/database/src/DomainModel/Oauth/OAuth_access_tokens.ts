@@ -10,10 +10,10 @@ export class OAuthAccessTokens implements IEntity {
   @Column({ type: 'varchar', nullable: false, name: 'oauth_client_id' })
   private _oAuthClientId: string;
 
-  @Column({ type: 'timestamp', nullable: false, name: 'expires_at' })
+  @Column({ type: 'timestamp', nullable: false, name: 'expires_at', default: () => 'CURRENT_TIMESTAMP' })
   private _expiresAt: string;
 
-  @Column({ type: 'timestamp', nullable: false, name: 'created_at' })
+  @Column({ type: 'timestamp', nullable: false, name: 'created_at', default: () => 'CURRENT_TIMESTAMP' })
   private _createdAt: string;
 
   @Column({ type: 'varchar', nullable: false, name: 'user_id' })

@@ -17,6 +17,7 @@ import {
   InjectRepository
 } from "typeorm-typedi-extensions";
 import { access } from "fs";
+import { OAuthClient } from "../../DomainModel/Oauth/OAuth_client";
 
 interface IOauthRepository {
   getById(id: string);
@@ -39,7 +40,7 @@ export class OauthRepository implements OauthRepository {
     return this._connection.manager.save(oAuthAccessToken);
   }
 
-  public getById(id: string | Array<string>): Promise<OAuthAccessTokens[]> {
+  public getAccessTokenById(id: string | Array<string>): Promise<OAuthAccessTokens[]> {
     let idArray: string | Array<string> = [];
     if (id instanceof Array) {
       idArray = id;
@@ -49,13 +50,12 @@ export class OauthRepository implements OauthRepository {
     return this._connection.getRepository(OAuthAccessTokens).findByIds(idArray);
   }
 
-  public getByUserId(userId: string): Promise<OAuthAccessTokens[]> {
+  public getAccessTokenByUserId(userId: string): Promise<OAuthAccessTokens[]> {
     return this._connection.getRepository(OAuthAccessTokens).find({ userId: userId });
   }
 
-  // public getByAccessToken(identifier: string): Promise<OAuthAccessTokens[]> {
-  //   return this._connection
-  //     .getRepository(OAuthAccessTokens)
-  //     .find({ identifier: identifier });
+  // public getClientByIdentifier(identifier: string): Promise<OAuthClient[]> {
+  //   return this._connection.getRepository(OAuthClient).find({ identifier: identifier });
   // }
+
 }

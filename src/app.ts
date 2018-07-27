@@ -38,7 +38,7 @@ app.get('/profile', (req, res) => {
 });
 app.get(RouteDefinitions['user'], getUser.execute);
 app.post(RouteDefinitions['user.create'], createUser.execute);
-app.post(RouteDefinitions['user.auth'], createUser.execute);
+app.post(RouteDefinitions['user.auth'], checkUser.execute);
 app.post(RouteDefinitions['user.auth'], getOAuthAccess.execute);
 
 module.exports = app;

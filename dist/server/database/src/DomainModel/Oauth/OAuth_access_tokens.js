@@ -88,11 +88,11 @@ var OAuthAccessTokens = /** @class */ (function () {
         __metadata("design:type", String)
     ], OAuthAccessTokens.prototype, "_oAuthClientId", void 0);
     __decorate([
-        typeorm_1.Column({ type: 'timestamp', nullable: false, name: 'expires_at' }),
+        typeorm_1.Column({ type: 'timestamp', nullable: false, name: 'expires_at', default: function () { return 'CURRENT_TIMESTAMP'; } }),
         __metadata("design:type", String)
     ], OAuthAccessTokens.prototype, "_expiresAt", void 0);
     __decorate([
-        typeorm_1.Column({ type: 'timestamp', nullable: false, name: 'created_at' }),
+        typeorm_1.Column({ type: 'timestamp', nullable: false, name: 'created_at', default: function () { return 'CURRENT_TIMESTAMP'; } }),
         __metadata("design:type", String)
     ], OAuthAccessTokens.prototype, "_createdAt", void 0);
     __decorate([

@@ -17,7 +17,7 @@ export class OAuthClient implements IEntity {
   @Column({ type: 'varchar', nullable: false, name: 'redirect_urls' })
   private _redirectUrls: string;
 
-  @Column({ type: 'varchar', nullable: false, name: 'created_at' })
+  @Column({ type: 'varchar', nullable: false, name: 'created_at', default: () => 'CURRENT_TIMESTAMP' })
   private _createdAt: string;
   
   constructor(id:string = null) {

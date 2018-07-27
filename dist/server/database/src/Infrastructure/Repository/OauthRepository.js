@@ -27,7 +27,7 @@ var OauthRepository = /** @class */ (function () {
     OauthRepository.prototype.createOauthAccessToken = function (oAuthAccessToken) {
         return this._connection.manager.save(oAuthAccessToken);
     };
-    OauthRepository.prototype.getById = function (id) {
+    OauthRepository.prototype.getAccessTokenById = function (id) {
         var idArray = [];
         if (id instanceof Array) {
             idArray = id;
@@ -37,7 +37,7 @@ var OauthRepository = /** @class */ (function () {
         }
         return this._connection.getRepository(OAuth_access_tokens_1.OAuthAccessTokens).findByIds(idArray);
     };
-    OauthRepository.prototype.getByUserId = function (userId) {
+    OauthRepository.prototype.getAccessTokenByUserId = function (userId) {
         return this._connection.getRepository(OAuth_access_tokens_1.OAuthAccessTokens).find({ userId: userId });
     };
     OauthRepository = __decorate([

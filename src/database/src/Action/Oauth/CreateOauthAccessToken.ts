@@ -10,8 +10,6 @@ export class CreateOauthAccessToken implements ICommand {
     private _accessToken: string | null,
     private _accessTokenExpiresOn: string | null,
     private _clientId: string | null = null,
-    private _refreshToken: string | null,
-    private _refreshTokenExpiresOn: string | null,
     private _userId: string | null
   ) {
     this._oAuthAccessToken = new OAuthAccessTokens();

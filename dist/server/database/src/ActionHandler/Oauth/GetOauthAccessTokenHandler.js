@@ -57,10 +57,10 @@ var GetOauthAccessTokenHandler = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 if (this.command.accessToken) {
-                    return [2 /*return*/, this.oAuthRepository.getById(this.command.accessToken)];
+                    return [2 /*return*/, this.oAuthRepository.getAccessTokenById(this.command.accessToken)];
                 }
                 if (this.command.userId) {
-                    return [2 /*return*/, this.oAuthRepository.getByUserId(this.command.userId)];
+                    return [2 /*return*/, this.oAuthRepository.getAccessTokenByUserId(this.command.userId)];
                 }
                 return [2 /*return*/];
             });

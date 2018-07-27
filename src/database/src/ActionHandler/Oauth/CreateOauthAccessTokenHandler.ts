@@ -1,7 +1,7 @@
 import { ICommandHandler } from '../../Infrastructure/Lib/Action/ActionHandler';
 import { IResponse } from '../../Infrastructure/Lib/Response/Response';
-import "reflect-metadata";
-import { Service, Container} from "typedi";
+import 'reflect-metadata';
+import { Service, Container} from 'typedi';
 import { OauthRepository } from '../../Infrastructure/Repository/OauthRepository';
 import { CreateOauthAccessToken } from '../../Action/Oauth/CreateOauthAccessToken';
 

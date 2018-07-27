@@ -82,7 +82,7 @@ var OAuthClient = /** @class */ (function () {
         __metadata("design:type", String)
     ], OAuthClient.prototype, "_redirectUrls", void 0);
     __decorate([
-        typeorm_1.Column({ type: 'varchar', nullable: false, name: 'created_at' }),
+        typeorm_1.Column({ type: 'varchar', nullable: false, name: 'created_at', default: function () { return 'CURRENT_TIMESTAMP'; } }),
         __metadata("design:type", String)
     ], OAuthClient.prototype, "_createdAt", void 0);
     OAuthClient = __decorate([

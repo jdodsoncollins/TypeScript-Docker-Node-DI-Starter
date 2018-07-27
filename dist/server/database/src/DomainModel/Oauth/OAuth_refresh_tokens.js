@@ -74,15 +74,15 @@ var OAuthRefreshTokens = /** @class */ (function () {
         __metadata("design:type", String)
     ], OAuthRefreshTokens.prototype, "_oAuthAccessTokenId", void 0);
     __decorate([
-        typeorm_1.Column({ type: 'varchar', nullable: false, name: 'access_token_expires_on' }),
+        typeorm_1.Column({ type: 'varchar', nullable: false, name: 'access_token_expires_on', default: function () { return 'CURRENT_TIMESTAMP'; } }),
         __metadata("design:type", String)
     ], OAuthRefreshTokens.prototype, "_accessTokenExpiresOn", void 0);
     __decorate([
-        typeorm_1.Column({ type: 'timestamp', nullable: false, name: 'expires_at' }),
+        typeorm_1.Column({ type: 'timestamp', nullable: false, name: 'expires_at', default: function () { return 'CURRENT_TIMESTAMP'; } }),
         __metadata("design:type", String)
     ], OAuthRefreshTokens.prototype, "_expiresAt", void 0);
     __decorate([
-        typeorm_1.Column({ type: 'timestamp', nullable: false, name: 'created_at' }),
+        typeorm_1.Column({ type: 'timestamp', nullable: false, name: 'created_at', default: function () { return 'CURRENT_TIMESTAMP'; } }),
         __metadata("design:type", String)
     ], OAuthRefreshTokens.prototype, "_createdAt", void 0);
     OAuthRefreshTokens = __decorate([

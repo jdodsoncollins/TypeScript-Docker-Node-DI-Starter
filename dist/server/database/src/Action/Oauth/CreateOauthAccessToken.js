@@ -3,13 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var OAuth_access_tokens_1 = require("../../DomainModel/Oauth/OAuth_access_tokens");
 var CreateOauthAccessTokenHandler_1 = require("../../ActionHandler/Oauth/CreateOauthAccessTokenHandler");
 var CreateOauthAccessToken = /** @class */ (function () {
-    function CreateOauthAccessToken(_accessToken, _accessTokenExpiresOn, _clientId, _refreshToken, _refreshTokenExpiresOn, _userId) {
+    function CreateOauthAccessToken(_accessToken, _accessTokenExpiresOn, _clientId, _userId) {
         if (_clientId === void 0) { _clientId = null; }
         this._accessToken = _accessToken;
         this._accessTokenExpiresOn = _accessTokenExpiresOn;
         this._clientId = _clientId;
-        this._refreshToken = _refreshToken;
-        this._refreshTokenExpiresOn = _refreshTokenExpiresOn;
         this._userId = _userId;
         this._oAuthAccessToken = new OAuth_access_tokens_1.OAuthAccessTokens();
         if (_accessToken) {
