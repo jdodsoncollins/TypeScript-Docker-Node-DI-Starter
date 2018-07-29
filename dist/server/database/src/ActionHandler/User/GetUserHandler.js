@@ -56,7 +56,6 @@ var GetUserHandler = /** @class */ (function () {
     GetUserHandler.prototype.execute = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                console.log('command', this.command);
                 if (this.command.userId) {
                     return [2 /*return*/, this.userRepository.getById(this.command.userId)];
                 }

@@ -23,7 +23,6 @@ export class OAuthAccessTokens implements IEntity {
   private _isRevoked: string;
 
   constructor(id:string = null) {
-    this.setIdentifier(id);
   }
 
   get identifier(): any {
@@ -70,7 +69,7 @@ export class OAuthAccessTokens implements IEntity {
     this._isRevoked = value;
   }
 
-  private setIdentifier(identifier: string): void {
+  set identifier(identifier: any) {
     this._identifier = identifier;
   }
 }

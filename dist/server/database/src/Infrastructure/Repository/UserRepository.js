@@ -38,7 +38,12 @@ var UserRepository = /** @class */ (function () {
         return this._connection.getRepository(User_1.User).findByIds(idArray);
     };
     UserRepository.prototype.getByEmail = function (email) {
-        return this._connection.getRepository(User_1.User).find({ email: email });
+        console.log(email);
+        return this._connection
+            .getRepository(User_1.User)
+            .createQueryBuilder('user')
+            .where('user.email = :email', { email: email })
+            .getOne();
     };
     UserRepository = __decorate([
         typedi_1.Service(),

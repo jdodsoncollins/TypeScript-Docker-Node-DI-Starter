@@ -57,10 +57,10 @@ var GetOAuthClientHandler = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 if (this.command.identifier) {
-                    return [2 /*return*/, this.oAuthRepository.getAccessTokenById(this.command.identifier)];
+                    return [2 /*return*/, this.oAuthRepository.getClientByIdentifier(this.command.identifier)];
                 }
-                if (this.command.secret) {
-                    return [2 /*return*/, this.oAuthRepository.getAccessTokenByUserId(this.command.secret)];
+                if (this.command.redirectUri) {
+                    return [2 /*return*/, this.oAuthRepository.getClientByRedirectUri(this.command.redirectUri)];
                 }
                 return [2 /*return*/];
             });

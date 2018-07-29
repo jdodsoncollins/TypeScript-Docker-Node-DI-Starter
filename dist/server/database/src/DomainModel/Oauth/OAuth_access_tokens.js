@@ -13,11 +13,13 @@ var typeorm_1 = require("typeorm");
 var OAuthAccessTokens = /** @class */ (function () {
     function OAuthAccessTokens(id) {
         if (id === void 0) { id = null; }
-        this.setIdentifier(id);
     }
     Object.defineProperty(OAuthAccessTokens.prototype, "identifier", {
         get: function () {
             return this._identifier;
+        },
+        set: function (identifier) {
+            this._identifier = identifier;
         },
         enumerable: true,
         configurable: true
@@ -76,9 +78,6 @@ var OAuthAccessTokens = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    OAuthAccessTokens.prototype.setIdentifier = function (identifier) {
-        this._identifier = identifier;
-    };
     __decorate([
         typeorm_1.PrimaryColumn({ type: 'varchar', nullable: false, name: 'identifier' }),
         __metadata("design:type", Object)

@@ -16,10 +16,11 @@ export class GetOAuthClientHandler implements IQueryHandler {
 
   async execute(): Promise<IResponse> {
     if (this.command.identifier) {
-        return this.oAuthRepository.getAccessTokenById(this.command.identifier)
-    } 
-    if (this.command.secret) {
-      return this.oAuthRepository.getAccessTokenByUserId(this.command.secret)
+        return this.oAuthRepository.getClientByIdentifier(this.command.identifier)
+    }
+    
+    if (this.command.redirectUri) {
+      return this.oAuthRepository.getClientByRedirectUri(this.command.redirectUri)
     } 
   }
 }

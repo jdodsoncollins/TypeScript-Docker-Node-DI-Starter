@@ -4,11 +4,11 @@ import { IResponse } from './Response/Response';
 import { IQuery } from './Bus/Query/IQuery';
 import { CommandBus, ICommandBus } from './Bus/Command/CommandBus';
 import { IQueryBus, QueryBus } from './Bus/Query/QueryBus';
-import "reflect-metadata";
-import "reflect-metadata";
-import {Service, Container} from "typedi";
+import 'reflect-metadata';
+import 'reflect-metadata';
+import {Service, Container} from 'typedi';
 import { Connection, EntityManager } from 'typeorm';
-import {InjectConnection} from "typeorm-typedi-extensions";
+import {InjectConnection} from 'typeorm-typedi-extensions';
 
 @Service()
 export class ApplicationCore {

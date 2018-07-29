@@ -1,4 +1,4 @@
-import { OAuthAccessTokens } from "../../DomainModel/Oauth/OAuth_access_tokens";
+import { OAuthAccessTokens } from '../../DomainModel/Oauth/OAuth_access_tokens';
 import {
   Connection,
   Repository,
@@ -8,16 +8,16 @@ import {
   getConnectionManager,
   getConnection,
   ConnectionManager
-} from "typeorm";
-import "reflect-metadata";
-import { Service, Container } from "typedi";
+} from 'typeorm';
+import 'reflect-metadata';
+import { Service, Container } from 'typedi';
 import {
   InjectConnection,
   InjectManager,
   InjectRepository
-} from "typeorm-typedi-extensions";
-import { access } from "fs";
-import { OAuthClient } from "../../DomainModel/Oauth/OAuth_client";
+} from 'typeorm-typedi-extensions';
+import { access } from 'fs';
+import { OAuthClient } from '../../DomainModel/Oauth/OAuth_client';
 
 interface IOauthRepository {
   getById(id: string);
@@ -50,12 +50,25 @@ export class OauthRepository implements OauthRepository {
     return this._connection.getRepository(OAuthAccessTokens).findByIds(idArray);
   }
 
-  public getAccessTokenByUserId(userId: string): Promise<OAuthAccessTokens[]> {
-    return this._connection.getRepository(OAuthAccessTokens).find({ userId: userId });
+  public getAccessTokenByUserId(userId: string): Promise<OAuthAccessTokens> {
+    return this._connection.getRepository(OAuthAccessTokens)
+    .createQueryBuilder('OAuthAccessTokens')
+    .where('OAuthAccessTokens.user_id = :userId', { userId: userId })
+    .getOne();
   }
 
-  // public getClientByIdentifier(identifier: string): Promise<OAuthClient[]> {
-  //   return this._connection.getRepository(OAuthClient).find({ identifier: identifier });
-  // }
+  public getClientByRedirectUri(redirectUri: string): Promise<OAuthClient> {
+    return this._connection.getRepository(OAuthClient)
+    .createQueryBuilder('OAuthClient')
+    .where('OAuthClient.redirect_uri = :redirectUri', { redirectUri: redirectUri })
+    .getOne();
+  }
+
+  public getClientByIdentifier(identifier: string): Promise<OAuthClient> {
+    return this._connection.getRepository(OAuthClient)
+    .createQueryBuilder('OAuthClient')
+    .where('OAuthClient.identifier = :identifier', { identifier: identifier })
+    .getOne();
+  }
 
 }

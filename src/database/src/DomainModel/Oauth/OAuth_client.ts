@@ -14,17 +14,17 @@ export class OAuthClient implements IEntity {
   @Column({ type: 'varchar', nullable: false, name: 'name' })
   private _name: string;
 
-  @Column({ type: 'varchar', nullable: false, name: 'redirect_urls' })
-  private _redirectUrls: string;
+  @Column({ type: 'varchar', nullable: false, name: 'redirect_uri' })
+  private _redirectUri: string;
 
   @Column({ type: 'varchar', nullable: false, name: 'created_at', default: () => 'CURRENT_TIMESTAMP' })
   private _createdAt: string;
   
-  constructor(id:string = null) {
-    this.setIdentifier(id);
+  constructor(identifier:string = null) {
+    this.identifier = identifier;
   }
 
-  get identifier(): any {
+  get identifier(): string {
     return this._identifier;
   }
 
@@ -44,12 +44,12 @@ export class OAuthClient implements IEntity {
     this._name = value;
   }
 
-  get redirectUrls(): string {
-    return this._redirectUrls;
+  get redirectUri(): string {
+    return this._redirectUri;
   }
 
-  set redirectUrls(value: string) {
-    this._redirectUrls = value;
+  set redirectUri(value: string) {
+    this._redirectUri = value;
   }
 
   get createdAt(): string {
@@ -60,7 +60,7 @@ export class OAuthClient implements IEntity {
     this._createdAt = value;
   }
 
-  private setIdentifier(identifier: string): void {
+  set identifier(identifier: string) {
     this._identifier = identifier;
   }
 }

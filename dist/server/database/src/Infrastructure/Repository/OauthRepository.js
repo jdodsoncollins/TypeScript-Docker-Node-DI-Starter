@@ -17,6 +17,7 @@ var typeorm_1 = require("typeorm");
 require("reflect-metadata");
 var typedi_1 = require("typedi");
 var typeorm_typedi_extensions_1 = require("typeorm-typedi-extensions");
+var OAuth_client_1 = require("../../DomainModel/Oauth/OAuth_client");
 var OauthRepository = /** @class */ (function () {
     function OauthRepository(connection, entityManager) {
         this.connection = connection;
@@ -38,7 +39,22 @@ var OauthRepository = /** @class */ (function () {
         return this._connection.getRepository(OAuth_access_tokens_1.OAuthAccessTokens).findByIds(idArray);
     };
     OauthRepository.prototype.getAccessTokenByUserId = function (userId) {
-        return this._connection.getRepository(OAuth_access_tokens_1.OAuthAccessTokens).find({ userId: userId });
+        return this._connection.getRepository(OAuth_access_tokens_1.OAuthAccessTokens)
+            .createQueryBuilder('OAuthAccessTokens')
+            .where('OAuthAccessTokens.user_id = :userId', { userId: userId })
+            .getOne();
+    };
+    OauthRepository.prototype.getClientByRedirectUri = function (redirectUri) {
+        return this._connection.getRepository(OAuth_client_1.OAuthClient)
+            .createQueryBuilder('OAuthClient')
+            .where('OAuthClient.redirect_uri = :redirectUri', { redirectUri: redirectUri })
+            .getOne();
+    };
+    OauthRepository.prototype.getClientByIdentifier = function (identifier) {
+        return this._connection.getRepository(OAuth_client_1.OAuthClient)
+            .createQueryBuilder('OAuthClient')
+            .where('OAuthClient.identifier = :identifier', { identifier: identifier })
+            .getOne();
     };
     OauthRepository = __decorate([
         typedi_1.Service(),

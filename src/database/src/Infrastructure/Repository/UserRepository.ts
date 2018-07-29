@@ -1,7 +1,7 @@
 import { Connection, Repository, EntityRepository, EntityManager, useContainer, getConnectionManager, getConnection, ConnectionManager } from 'typeorm';
 import { User } from '../../DomainModel/User/User';
-import "reflect-metadata";
-import { Service, Container } from "typedi";
+import 'reflect-metadata';
+import { Service, Container } from 'typedi';
 import { InjectConnection, InjectManager, InjectRepository } from 'typeorm-typedi-extensions';
 
 interface IUserRepository {
@@ -37,8 +37,13 @@ export class UserRepository implements IUserRepository {
     return this._connection.getRepository(User).findByIds(idArray);
   }
 
-  public getByEmail(email: string): Promise<User[]> {
-      return this._connection.getRepository(User).find({email: email})
+  public getByEmail(email: string): Promise<User> {
+    console.log(email);
+      return this._connection
+      .getRepository(User)
+      .createQueryBuilder('user')
+      .where('user.email = :email', { email: email })
+      .getOne();
   }
 
 }

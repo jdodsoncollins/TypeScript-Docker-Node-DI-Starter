@@ -11,13 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
 var OAuthClient = /** @class */ (function () {
-    function OAuthClient(id) {
-        if (id === void 0) { id = null; }
-        this.setIdentifier(id);
+    function OAuthClient(identifier) {
+        if (identifier === void 0) { identifier = null; }
+        this.identifier = identifier;
     }
     Object.defineProperty(OAuthClient.prototype, "identifier", {
         get: function () {
             return this._identifier;
+        },
+        set: function (identifier) {
+            this._identifier = identifier;
         },
         enumerable: true,
         configurable: true
@@ -42,12 +45,12 @@ var OAuthClient = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(OAuthClient.prototype, "redirectUrls", {
+    Object.defineProperty(OAuthClient.prototype, "redirectUri", {
         get: function () {
-            return this._redirectUrls;
+            return this._redirectUri;
         },
         set: function (value) {
-            this._redirectUrls = value;
+            this._redirectUri = value;
         },
         enumerable: true,
         configurable: true
@@ -62,9 +65,6 @@ var OAuthClient = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    OAuthClient.prototype.setIdentifier = function (identifier) {
-        this._identifier = identifier;
-    };
     __decorate([
         typeorm_1.PrimaryColumn({ type: 'varchar', nullable: false, name: 'identifier' }),
         __metadata("design:type", Object)
@@ -78,9 +78,9 @@ var OAuthClient = /** @class */ (function () {
         __metadata("design:type", String)
     ], OAuthClient.prototype, "_name", void 0);
     __decorate([
-        typeorm_1.Column({ type: 'varchar', nullable: false, name: 'redirect_urls' }),
+        typeorm_1.Column({ type: 'varchar', nullable: false, name: 'redirect_uri' }),
         __metadata("design:type", String)
-    ], OAuthClient.prototype, "_redirectUrls", void 0);
+    ], OAuthClient.prototype, "_redirectUri", void 0);
     __decorate([
         typeorm_1.Column({ type: 'varchar', nullable: false, name: 'created_at', default: function () { return 'CURRENT_TIMESTAMP'; } }),
         __metadata("design:type", String)

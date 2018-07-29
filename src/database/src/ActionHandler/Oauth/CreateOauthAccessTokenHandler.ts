@@ -11,7 +11,6 @@ export class CreateOauthAccessTokenHandler implements ICommandHandler {
   constructor(private command: CreateOauthAccessToken) {}
 
   async execute(): Promise<IResponse> {
-    console.log(this.command);
     return this.oAuthRepository.createOauthAccessToken(this.command.oAuthAccessToken);
   }
 }

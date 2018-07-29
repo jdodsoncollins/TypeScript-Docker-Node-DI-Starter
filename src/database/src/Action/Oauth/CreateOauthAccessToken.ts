@@ -1,7 +1,7 @@
-import { IActionHandler } from "../../Infrastructure/Lib/Action/ActionHandler";
-import { ICommand } from "../../Infrastructure/Lib/Bus/Command/ICommand";
-import { OAuthAccessTokens } from "../../DomainModel/Oauth/OAuth_access_tokens";
-import { CreateOauthAccessTokenHandler } from "../../ActionHandler/Oauth/CreateOauthAccessTokenHandler";
+import { IActionHandler } from '../../Infrastructure/Lib/Action/ActionHandler';
+import { ICommand } from '../../Infrastructure/Lib/Bus/Command/ICommand';
+import { OAuthAccessTokens } from '../../DomainModel/Oauth/OAuth_access_tokens';
+import { CreateOauthAccessTokenHandler } from '../../ActionHandler/Oauth/CreateOauthAccessTokenHandler';
 
 export class CreateOauthAccessToken implements ICommand {
   private _oAuthAccessToken: OAuthAccessTokens | null;

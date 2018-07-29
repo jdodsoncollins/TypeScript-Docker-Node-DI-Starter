@@ -46,7 +46,6 @@ var CreateOauthAccessTokenHandler = /** @class */ (function () {
     CreateOauthAccessTokenHandler.prototype.execute = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                console.log(this.command);
                 return [2 /*return*/, this.oAuthRepository.createOauthAccessToken(this.command.oAuthAccessToken)];
             });
         });
