@@ -12,10 +12,11 @@ This is a starter back-end project that incorporates the following frameworks an
 
 #### To get up and running
 
+First, generate a `.env` file, where variables such as `process.env.SECRET` can be pulled from. See `.env.tmpl` for the template.
+
+Then,
 `npm install`
 `cd docker && docker-compose up`
-
-Next, generate a `.env` file, where variables such as `process.env.SECRET` can be pulled from. See `.env.tmpl` for the template.
 
 Finally, `npm run serve:dev` and it should be up, hosted on `localhost:3000`. 
 
@@ -29,7 +30,7 @@ MySQL is on `127.0.0.1:33066` with username `root` and password `root`. Go in th
 
 #### Existing endpoints and OAuth functionality
 
-`localhost:3000/oauth/login?client_id=clientIdAddedToClienttable&redirect_uri=redirectAddedToClientTable` is set up to be a demo login page that returns an OAuth token. `client_id` and `redirect_uri` params are required and read off of the matching `OAuthClient` MySQL table columns, so just fill in an entry on that table and pass those values along in the URL
+`localhost:3000/oauth/login?client_id=clientIdAddedToClientTable&redirect_uri=redirectAddedToClientTable` is set up to be a demo login page that returns an OAuth token. `client_id` and `redirect_uri` params are required and read off of the matching `OAuthClient` MySQL table columns, so just fill in an entry on that table and pass those values along in the URL
 
 Additionally, you can check the `getUser` endpoint by hitting the URLs such as `/user?email=myEmailThatIAddedToUserTable@domain.com`, or POST a `firstName`, `lastNam`, `email`, and `password` to `users/create`
 
