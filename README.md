@@ -17,9 +17,9 @@ This is a starter back-end project that incorporates the following frameworks an
 
 Next, generate a `.env` file, where variables such as `process.env.SECRET` can be pulled from. See `.env.tmpl` for the template.
 
-Then...
-`npm run serve:dev`
-and it should be up, hosted on `localhost:3000`. MySQL is on `127.0.0.1:33066` with username `root` and password `root`. Go in there, and you should see a user table as well as OAuth tables.
+Finally, `npm run serve:dev` and it should be up, hosted on `localhost:3000`. 
+
+MySQL is on `127.0.0.1:33066` with username `root` and password `root`. Go in there, and you should see a user table as well as OAuth tables.
 
 
 #### Tests
@@ -29,9 +29,9 @@ and it should be up, hosted on `localhost:3000`. MySQL is on `127.0.0.1:33066` w
 
 #### Existing endpoints and OAuth functionality
 
-`localhost:3000/oauth/login?client_id=test123&redirect_uri=localhost:3000` is set up to be a demo login page that returns an OAuth token. `client_id` and `redirect_uri` params are required and read off of the matching `OAuthClient` MySQL table columns, so just fill in an entry on that table and pass those values along in the URL
+`localhost:3000/oauth/login?client_id=clientIdAddedToClienttable&redirect_uri=redirectAddedToClientTable` is set up to be a demo login page that returns an OAuth token. `client_id` and `redirect_uri` params are required and read off of the matching `OAuthClient` MySQL table columns, so just fill in an entry on that table and pass those values along in the URL
 
-Additionally, you can check the `getUser` endpoint by hitting the URLs such as `/user?id=1234`, or POST a `firstName`, `lastNam`, `email`, and `password` to `users/create`
+Additionally, you can check the `getUser` endpoint by hitting the URLs such as `/user?email=myEmailThatIAddedToUserTable@domain.com`, or POST a `firstName`, `lastNam`, `email`, and `password` to `users/create`
 
 Currently, password credentials are the only type of OAuth type supported, however it is designed to follow the spec for this implementation
 
