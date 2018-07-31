@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { GetUser } from '../../database/src/Action/User/GetUser';
 import { ApplicationCore } from '../../database/src/Infrastructure/Lib/ApplicationCore';
 import { CreateUser } from '../../database/src/Action/User/CreateUser';
+import { GetOauthAccessToken } from '../../database/src/Action/Oauth/GetOauthAccessToken';
 const bcrypt = require('bcrypt');
 
 export let execute = async (req: Request, response: Response) => {
@@ -11,6 +12,17 @@ export let execute = async (req: Request, response: Response) => {
     let emailAddress = req.body.email;
     let password = req.body.password;
     const appCore = new ApplicationCore();
+
+    // let getOAuthTokenResponse;
+    // if (req.headers.authorization) {
+    //     const getOAuthTokenCommand = new GetOauthAccessToken(req.headers.authorization);
+    //     getOAuthTokenResponse = await appCore.dispatchQuery(getOAuthTokenCommand);
+    // }
+
+    // if (!getOAuthTokenResponse) {
+    //     response.status(403);
+    //     return response.json('Unauthorized');
+    // }
 
     if (!emailAddress) {
         response.status(404);

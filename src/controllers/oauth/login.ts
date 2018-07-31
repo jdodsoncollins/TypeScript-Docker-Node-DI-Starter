@@ -4,6 +4,7 @@ import { ApplicationCore } from '../../database/src/Infrastructure/Lib/Applicati
 import * as bcrypt from 'bcrypt';
 import * as queryString from 'query-string';
 import { GetOAuthClient } from '../../database/src/Action/Oauth/GetOAuthClient';
+import { RouteDefinitions } from '../../routing/route-definitions.constant';
 
 export let get = async (req: Request, res: Response) => {
     const errors: string[] = [];
@@ -32,7 +33,7 @@ export let get = async (req: Request, res: Response) => {
     const getOAuthClientIdResponse = await appCore.dispatchQuery(getOAuthClientIdCommand);
 
     const getOAuthClientRedirectUriCommand = new GetOAuthClient(null, null, redirectUri);
-    const getOAuthCLientRedirectUriResponse = await appCore.dispatchQuery(getOAuthClientRedirectUriCommand);
+    const getOAuthClientRedirectUriResponse = await appCore.dispatchQuery(getOAuthClientRedirectUriCommand);
 
     console.log(getOAuthClientIdResponse);
 
@@ -40,7 +41,7 @@ export let get = async (req: Request, res: Response) => {
         errors.push('client_id is not found in authorized client list')
     }
 
-    if (!getOAuthCLientRedirectUriResponse) {
+    if (!getOAuthClientRedirectUriResponse || getOAuthClientIdResponse['_redirectUri'] !== redirectUri) {
         errors.push('redirect_uri is not found in authorized client list')
     }
 
@@ -49,7 +50,7 @@ export let get = async (req: Request, res: Response) => {
         return res.json(errors);
     }
 
-    const loginUrl = '/oauth/authorize?' + queryString.stringify({
+    const loginUrl = RouteDefinitions['oauth.authorize'] + '?' + queryString.stringify({
         redirect_uri: req.query.redirect_uri,
         client_id: req.query.client_id,
         state: req.query.state,

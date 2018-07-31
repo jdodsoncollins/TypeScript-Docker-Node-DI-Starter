@@ -6,6 +6,8 @@ import * as bcrypt from 'bcrypt';
 import * as moment from 'moment';
 import { GetOAuthClient } from '../../database/src/Action/Oauth/GetOAuthClient';
 import { CreateOauthAccessToken } from '../../database/src/Action/Oauth/CreateOauthAccessToken';
+import * as queryString from 'query-string';
+import { RouteDefinitions } from '../../routing/route-definitions.constant';
 
 interface JWTAccessToken {
 
@@ -45,13 +47,13 @@ export let authorize = async (req: Request, res: Response) => {
     const getOAuthClientIdResponse = await appCore.dispatchQuery(getOAuthClientIdCommand);
 
     const getOAuthClientRedirectUriCommand = new GetOAuthClient(null, null, redirectUri);
-    const getOAuthCLientRedirectUriResponse = await appCore.dispatchQuery(getOAuthClientRedirectUriCommand);
+    const getOAuthClientRedirectUriResponse = await appCore.dispatchQuery(getOAuthClientRedirectUriCommand);
 
     if (!getOAuthClientIdResponse) {
         errors.push('client_id is not found in authorized client list')
     }
 
-    if (!getOAuthCLientRedirectUriResponse) {
+    if (!getOAuthClientRedirectUriResponse || getOAuthClientIdResponse['_redirectUri'] !== redirectUri) {
         errors.push('redirect_uri is not found in authorized client list')
     }
 
@@ -63,7 +65,7 @@ export let authorize = async (req: Request, res: Response) => {
     // create access token for user, token identifier is random 80 character string and token duration is set
 
     const token = randToken.uid(80);
-    const expiresOn = moment().add(24, 'hours').format('YYYY-MM-DD HH:mm:ss');
+    const expiresOn = moment().utc().add(24, 'hours').format('YYYY-MM-DD HH:mm:ss');
     const createOauthAccessTokenCommand = new CreateOauthAccessToken(token, expiresOn, clientId, emailAddress);
     const createOauthAccessTokenCommandResponse = await appCore.dispatchCommand(createOauthAccessTokenCommand);
     console.log(createOauthAccessTokenCommandResponse);
@@ -79,5 +81,11 @@ export let authorize = async (req: Request, res: Response) => {
 
     // redirect back to the Front End Client
 
-    return res.redirect(301, `${redirectUri}#access_token=${token}`);
+    const confirmUrl = RouteDefinitions['oauth.confirm'] + '?' + queryString.stringify({
+        redirect_uri: req.query.redirect_uri,
+        client_name: getOAuthClientIdResponse['_name'],
+        token: token,
+    });
+
+    return res.redirect(301, confirmUrl);
 };

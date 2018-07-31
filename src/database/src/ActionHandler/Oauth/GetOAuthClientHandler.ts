@@ -18,9 +18,17 @@ export class GetOAuthClientHandler implements IQueryHandler {
     if (this.command.identifier) {
         return this.oAuthRepository.getClientByIdentifier(this.command.identifier)
     }
-    
+
     if (this.command.redirectUri) {
       return this.oAuthRepository.getClientByRedirectUri(this.command.redirectUri)
+    } 
+
+    if (this.command.secret) {
+      return this.oAuthRepository.getClientByRedirectUri(this.command.secret)
+    }
+
+    if (this.command.name) {
+      return this.oAuthRepository.getClientByRedirectUri(this.command.name)
     } 
   }
 }

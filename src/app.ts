@@ -7,6 +7,7 @@ import "reflect-metadata";
 import * as getUser from './controllers/user/get-user';
 import * as createUser from './controllers/user/create-user';
 import * as postOAuthAuthorize from './controllers/oauth/authorize';
+import * as getOAuthConfirm from './controllers/oauth/confirm';
 import { join } from 'path';
 import * as getOAuthLogin from './controllers/oauth/login';
 import { RouteDefinitions } from './routing/route-definitions.constant';
@@ -46,5 +47,7 @@ app.post(RouteDefinitions['user.create'], createUser.execute);
 
 app.get(RouteDefinitions['oauth.login'], getOAuthLogin.get);
 app.post(RouteDefinitions['oauth.authorize'], postOAuthAuthorize.authorize);
+app.get(RouteDefinitions['oauth.confirm'], getOAuthConfirm.get);
+app.get(RouteDefinitions['oauth.redirect'], getOAuthConfirm.redirect);
 
 module.exports = app;

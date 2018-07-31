@@ -71,4 +71,18 @@ export class OauthRepository implements OauthRepository {
     .getOne();
   }
 
+  public getClientBySecret(secret: string): Promise<OAuthClient> {
+    return this._connection.getRepository(OAuthClient)
+    .createQueryBuilder('OAuthClient')
+    .where('OAuthClient.secret = :secret', { secret: secret })
+    .getOne();
+  }
+
+  public getClientsByName(name: string): Promise<OAuthClient[]> {
+    return this._connection.getRepository(OAuthClient)
+    .createQueryBuilder('OAuthClient')
+    .where('OAuthClient.name = :name', { name: name })
+    .getMany();
+  }
+
 }
