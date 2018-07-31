@@ -1,35 +1,38 @@
 import { IActionHandler } from '../../Infrastructure/Lib/Action/ActionHandler';
 import { ICommand } from '../../Infrastructure/Lib/Bus/Command/ICommand';
-import { OAuthAccessTokens } from '../../DomainModel/Oauth/OAuth_access_tokens';
+import { OAuthAccessToken } from '../../DomainModel/Oauth/OAuth_access_token';
 import { CreateOauthAccessTokenHandler } from '../../ActionHandler/Oauth/CreateOauthAccessTokenHandler';
 
 export class CreateOauthAccessToken implements ICommand {
-  private _oAuthAccessToken: OAuthAccessTokens | null;
+  private _oAuthAccessToken: OAuthAccessToken | null;
 
   constructor(
-    private _accessToken: string | null,
-    private _accessTokenExpiresOn: string | null,
+    private _identifier: string | null = null,
+    private _accessTokenExpiresOn: string | null = null,
     private _clientId: string | null = null,
-    private _userId: string | null
+    private _userId: string | null = null
   ) {
-    this._oAuthAccessToken = new OAuthAccessTokens();
-    if (_accessToken) {
-      this.setAccessToken(_accessToken);
+    this._oAuthAccessToken = new OAuthAccessToken();
+    if (_identifier) {
+      this.setIdentifier(_identifier);
     }
     if (_accessTokenExpiresOn) {
       this.setAccessTokenExpiresOn(_accessTokenExpiresOn);
+    }
+    if (_userId) {
+      this.setUserId(_userId);
     }
     if (_clientId) {
       this.setClientId(_clientId);
     }
   }
 
-  get oAuthAccessToken(): OAuthAccessTokens {
-    return this.oAuthAccessToken;
+  get oAuthAccessToken(): OAuthAccessToken {
+    return this._oAuthAccessToken;
   }
 
-  private setAccessToken(accessToken) {
-    this._oAuthAccessToken = new OAuthAccessTokens(accessToken);
+  private setIdentifier(identifier) {
+    this._oAuthAccessToken.identifier = identifier;
   }
 
   private setAccessTokenExpiresOn(accessTokenExpiresOn) {

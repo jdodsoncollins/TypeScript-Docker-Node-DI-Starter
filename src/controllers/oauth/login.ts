@@ -1,17 +1,12 @@
 import { Request, Response } from 'express';
 import { GetUser } from '../../database/src/Action/User/GetUser';
 import { ApplicationCore } from '../../database/src/Infrastructure/Lib/ApplicationCore';
-import * as jwt from 'jsonwebtoken';
-import { HMACSHA256 } from 'crypto-js';
-import { base64url } from 'base64url';
-const bcrypt = require('bcrypt');
-
-
+import * as bcrypt from 'bcrypt';
 import * as queryString from 'query-string';
 import { GetOAuthClient } from '../../database/src/Action/Oauth/GetOAuthClient';
 
 export let get = async (req: Request, res: Response) => {
-    const errors = [];
+    const errors: string[] = [];
     const clientId = req.query.client_id;
     const redirectUri = req.query.redirect_uri;
 
@@ -49,7 +44,7 @@ export let get = async (req: Request, res: Response) => {
         errors.push('redirect_uri is not found in authorized client list')
     }
 
-    if (errors.length > 0) {
+    if (errors.length) {
         res.status(404);
         return res.json(errors);
     }
@@ -59,9 +54,11 @@ export let get = async (req: Request, res: Response) => {
         client_id: req.query.client_id,
         state: req.query.state,
         responseType: req.query.responseType,
-    })
+    });
 
     res.render('oauth-login.njk', {
         loginUrl,
+        clientId,
+        redirectUri,
     });
 };

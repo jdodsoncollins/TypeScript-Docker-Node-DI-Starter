@@ -2,8 +2,8 @@ import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { Uuid } from '../../Infrastructure/Lib/Id/Uuid';
 import { IEntity } from '../../Infrastructure/Entity/IEntity';
 
-@Entity('OAuthRefreshTokens', { name: 'oauth_refresh_tokens' })
-export class OAuthRefreshTokens implements IEntity {
+@Entity('OAuthRefreshToken', { name: 'oauth_refresh_token' })
+export class OAuthRefreshToken implements IEntity {
   @PrimaryColumn({ type: 'varchar', nullable: false, name: 'identifier' })
   private _identifier: any;
 
