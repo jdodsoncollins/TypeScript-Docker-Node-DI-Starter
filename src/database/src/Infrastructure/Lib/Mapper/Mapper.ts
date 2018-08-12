@@ -1,3 +1,3 @@
 export default {
-    UserRepository: Symbol.for('UserRepository')
+  UserRepository: Symbol.for('UserRepository'),
 };

@@ -6,7 +6,6 @@ export interface ICommandBus {
 }
 
 export class CommandBus implements ICommandBus {
-
   execute(command: ICommand): IResponse {
     let handler = command.getActionHandler();
     return handler.execute();

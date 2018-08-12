@@ -10,16 +10,31 @@ export class OAuthRefreshToken implements IEntity {
   @Column({ type: 'varchar', nullable: false, name: 'oauth_access_token_id' })
   private _oAuthAccessTokenId: string;
 
-  @Column({ type: 'varchar', nullable: false, name: 'access_token_expires_on', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({
+    type: 'varchar',
+    nullable: false,
+    name: 'access_token_expires_on',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   private _accessTokenExpiresOn: string;
 
-  @Column({ type: 'timestamp', nullable: false, name: 'expires_at', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({
+    type: 'timestamp',
+    nullable: false,
+    name: 'expires_at',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   private _expiresAt: string;
 
-  @Column({ type: 'timestamp', nullable: false, name: 'created_at', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({
+    type: 'timestamp',
+    nullable: false,
+    name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   private _createdAt: string;
-  
-  constructor(id:string = null) {
+
+  constructor(id: string = null) {
     this.setIdentifier(id);
   }
 
@@ -59,7 +74,7 @@ export class OAuthRefreshToken implements IEntity {
     this._createdAt = value;
   }
 
-  private setIdentifier(identifier: string ): void {
+  private setIdentifier(identifier: string): void {
     this._identifier = identifier;
   }
 }

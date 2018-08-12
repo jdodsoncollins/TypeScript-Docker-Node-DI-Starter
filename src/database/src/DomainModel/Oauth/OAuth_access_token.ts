@@ -10,20 +10,34 @@ export class OAuthAccessToken implements IEntity {
   @Column({ type: 'varchar', nullable: false, name: 'oauth_client_id' })
   private _oAuthClientId: string;
 
-  @Column({ type: 'timestamp', nullable: false, name: 'expires_at', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({
+    type: 'timestamp',
+    nullable: false,
+    name: 'expires_at',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   private _expiresAt: string;
 
-  @Column({ type: 'timestamp', nullable: false, name: 'created_at', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({
+    type: 'timestamp',
+    nullable: false,
+    name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   private _createdAt: string;
 
   @Column({ type: 'varchar', nullable: false, name: 'user_id' })
   private _userId: string;
 
-  @Column({ type: 'tinyint', nullable: false, name: 'is_revoked', default: () => '0' })
+  @Column({
+    type: 'tinyint',
+    nullable: false,
+    name: 'is_revoked',
+    default: () => '0',
+  })
   private _isRevoked: string;
 
-  constructor(id:string = null) {
-  }
+  constructor(id: string = null) {}
 
   get identifier(): any {
     return this._identifier;

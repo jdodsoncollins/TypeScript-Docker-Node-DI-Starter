@@ -10,15 +10,14 @@ import { User } from '../../DomainModel/User/User';
 
 @Service()
 export class GetUserHandler implements IQueryHandler {
-
   constructor(private command: GetUser) {}
   private userRepository = Container.get(UserRepository);
 
   async execute(): Promise<IResponse> {
     if (this.command.userId) {
-        return this.userRepository.getById(this.command.userId)
+      return this.userRepository.getById(this.command.userId);
     } else {
-        return this.userRepository.getByEmail(this.command.email)
+      return this.userRepository.getByEmail(this.command.email);
     }
   }
 }

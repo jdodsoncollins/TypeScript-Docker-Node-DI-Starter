@@ -10,7 +10,7 @@ export class GetUser implements IQuery {
   }
 
   get email(): string {
-      return this._email;
+    return this._email;
   }
 
   getActionHandler(): IActionHandler {

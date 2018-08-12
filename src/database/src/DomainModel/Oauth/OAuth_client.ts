@@ -4,7 +4,6 @@ import { IEntity } from '../../Infrastructure/Entity/IEntity';
 
 @Entity('OAuthClient', { name: 'oauth_client' })
 export class OAuthClient implements IEntity {
-
   @PrimaryColumn({ type: 'varchar', nullable: false, name: 'identifier' })
   private _identifier: any;
 
@@ -17,10 +16,15 @@ export class OAuthClient implements IEntity {
   @Column({ type: 'varchar', nullable: false, name: 'redirect_uri' })
   private _redirectUri: string;
 
-  @Column({ type: 'varchar', nullable: false, name: 'created_at', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({
+    type: 'varchar',
+    nullable: false,
+    name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   private _createdAt: string;
-  
-  constructor(identifier:string = null) {
+
+  constructor(identifier: string = null) {
     this.identifier = identifier;
   }
 

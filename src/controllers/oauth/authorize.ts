@@ -9,83 +9,105 @@ import { CreateOauthAccessToken } from '../../database/src/Action/Oauth/CreateOa
 import * as queryString from 'query-string';
 import { RouteDefinitions } from '../../routing/route-definitions.constant';
 
-interface JWTAccessToken {
-
-}
+interface JWTAccessToken {}
 
 export let authorize = async (req: Request, res: Response) => {
-    // validate against all the required fields (client_id, username, password, redirect_url at MINIMUM)
+  // validate against all the required fields (client_id, username, password, redirect_url at MINIMUM)
 
-    console.log('REQ BODY', req.body);
-    const emailAddress = req.body.user;
-    const password = req.body.password;
-    const clientId = req.body.client_id;
-    const redirectUri = req.body.redirect_uri;
-    const appCore = new ApplicationCore();
-    const errors: string[] = [];
+  console.log('REQ BODY', req.body);
+  const emailAddress = req.body.user;
+  const password = req.body.password;
+  const clientId = req.body.client_id;
+  const redirectUri = req.body.redirect_uri;
+  const appCore = new ApplicationCore();
+  const errors: string[] = [];
 
-    if (!emailAddress || !password) {
-        res.status(404);
-        res.json('Missing Email or Password');
-        return;
-    }
+  if (!emailAddress || !password) {
+    res.status(404);
+    res.json('Missing Email or Password');
+    return;
+  }
 
-    // find the user check the password they entered is correct throw if error
+  // find the user check the password they entered is correct throw if error
 
-    const getUserCommand = new GetUser(null, emailAddress);
-    const getUserResponse = await appCore.dispatchQuery(getUserCommand);
-    const match = await bcrypt.compare(password, getUserResponse['_password']);
-    if (!match) {
-        res.status(404);
-        res.json('Incorrect password');
-        return;
-    }
+  const getUserCommand = new GetUser(null, emailAddress);
+  const getUserResponse = await appCore.dispatchQuery(getUserCommand);
+  const match = await bcrypt.compare(password, getUserResponse['_password']);
+  if (!match) {
+    res.status(404);
+    res.json('Incorrect password');
+    return;
+  }
 
-    // find the oauth2 client based on the client_id validate the redirect_url is valid and known
+  // find the oauth2 client based on the client_id validate the redirect_url is valid and known
 
-    const getOAuthClientIdCommand = new GetOAuthClient(clientId);
-    const getOAuthClientIdResponse = await appCore.dispatchQuery(getOAuthClientIdCommand);
+  const getOAuthClientIdCommand = new GetOAuthClient(clientId);
+  const getOAuthClientIdResponse = await appCore.dispatchQuery(
+    getOAuthClientIdCommand
+  );
 
-    const getOAuthClientRedirectUriCommand = new GetOAuthClient(null, null, redirectUri);
-    const getOAuthClientRedirectUriResponse = await appCore.dispatchQuery(getOAuthClientRedirectUriCommand);
+  const getOAuthClientRedirectUriCommand = new GetOAuthClient(
+    null,
+    null,
+    redirectUri
+  );
+  const getOAuthClientRedirectUriResponse = await appCore.dispatchQuery(
+    getOAuthClientRedirectUriCommand
+  );
 
-    if (!getOAuthClientIdResponse) {
-        errors.push('client_id is not found in authorized client list')
-    }
+  if (!getOAuthClientIdResponse) {
+    errors.push('client_id is not found in authorized client list');
+  }
 
-    if (!getOAuthClientRedirectUriResponse || getOAuthClientIdResponse['_redirectUri'] !== redirectUri) {
-        errors.push('redirect_uri is not found in authorized client list')
-    }
+  if (
+    !getOAuthClientRedirectUriResponse ||
+    getOAuthClientIdResponse['_redirectUri'] !== redirectUri
+  ) {
+    errors.push('redirect_uri is not found in authorized client list');
+  }
 
-    if (errors.length) {
-        res.status(404);
-        res.json(errors);
-    }
+  if (errors.length) {
+    res.status(404);
+    res.json(errors);
+  }
 
-    // create access token for user, token identifier is random 80 character string and token duration is set
+  // create access token for user, token identifier is random 80 character string and token duration is set
 
-    const token = randToken.uid(80);
-    const expiresOn = moment().utc().add(24, 'hours').format('YYYY-MM-DD HH:mm:ss');
-    const createOauthAccessTokenCommand = new CreateOauthAccessToken(token, expiresOn, clientId, emailAddress);
-    const createOauthAccessTokenCommandResponse = await appCore.dispatchCommand(createOauthAccessTokenCommand);
-    console.log(createOauthAccessTokenCommandResponse);
+  const token = randToken.uid(80);
+  const expiresOn = moment()
+    .utc()
+    .add(24, 'hours')
+    .format('YYYY-MM-DD HH:mm:ss');
+  const createOauthAccessTokenCommand = new CreateOauthAccessToken(
+    token,
+    expiresOn,
+    clientId,
+    emailAddress
+  );
+  const createOauthAccessTokenCommandResponse = await appCore.dispatchCommand(
+    createOauthAccessTokenCommand
+  );
+  console.log(createOauthAccessTokenCommandResponse);
 
-    if (!createOauthAccessTokenCommandResponse) {
-        errors.push('Your login session could not be created.')
-    }
+  if (!createOauthAccessTokenCommandResponse) {
+    errors.push('Your login session could not be created.');
+  }
 
-    if (errors.length) {
-        res.status(404);
-        res.json(errors);
-    }
+  if (errors.length) {
+    res.status(404);
+    res.json(errors);
+  }
 
-    // redirect back to the Front End Client
+  // redirect back to the Front End Client
 
-    const confirmUrl = RouteDefinitions['oauth.confirm'] + '?' + queryString.stringify({
-        redirect_uri: req.query.redirect_uri,
-        client_name: getOAuthClientIdResponse['_name'],
-        token: token,
+  const confirmUrl =
+    RouteDefinitions['oauth.confirm'] +
+    '?' +
+    queryString.stringify({
+      redirect_uri: req.query.redirect_uri,
+      client_name: getOAuthClientIdResponse['_name'],
+      token: token,
     });
 
-    return res.redirect(301, confirmUrl);
+  return res.redirect(301, confirmUrl);
 };

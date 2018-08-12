@@ -26,11 +26,9 @@ export class MysqlConnection implements MysqlConnectionOptions {
     OAuthAccessToken,
     OAuthClient,
     OAuthRefreshToken,
-    OAuthScopes
+    OAuthScopes,
   ];
-  readonly migrations = [
-    projectRoot + '/migration/**/*.ts'
-  ];
+  readonly migrations = [projectRoot + '/migration/**/*.ts'];
   static connect(): MysqlConnection {
     console.log('MAKING CONNECTION');
     return new this();

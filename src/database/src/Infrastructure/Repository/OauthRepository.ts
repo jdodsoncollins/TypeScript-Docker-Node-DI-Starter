@@ -7,14 +7,14 @@ import {
   useContainer,
   getConnectionManager,
   getConnection,
-  ConnectionManager
+  ConnectionManager,
 } from 'typeorm';
 import 'reflect-metadata';
 import { Service, Container } from 'typedi';
 import {
   InjectConnection,
   InjectManager,
-  InjectRepository
+  InjectRepository,
 } from 'typeorm-typedi-extensions';
 import { access } from 'fs';
 import { OAuthClient } from '../../DomainModel/Oauth/OAuth_client';
@@ -40,7 +40,9 @@ export class OauthRepository implements OauthRepository {
     return this._connection.manager.save(oAuthAccessToken);
   }
 
-  public getAccessTokenById(id: string | Array<string>): Promise<OAuthAccessToken[]> {
+  public getAccessTokenById(
+    id: string | Array<string>
+  ): Promise<OAuthAccessToken[]> {
     let idArray: string | Array<string> = [];
     if (id instanceof Array) {
       idArray = id;
@@ -51,38 +53,44 @@ export class OauthRepository implements OauthRepository {
   }
 
   public getAccessTokenByUserId(userId: string): Promise<OAuthAccessToken> {
-    return this._connection.getRepository(OAuthAccessToken)
-    .createQueryBuilder('OAuthAccessToken')
-    .where('OAuthAccessToken.user_id = :userId', { userId: userId })
-    .getOne();
+    return this._connection
+      .getRepository(OAuthAccessToken)
+      .createQueryBuilder('OAuthAccessToken')
+      .where('OAuthAccessToken.user_id = :userId', { userId: userId })
+      .getOne();
   }
 
   public getClientByRedirectUri(redirectUri: string): Promise<OAuthClient> {
-    return this._connection.getRepository(OAuthClient)
-    .createQueryBuilder('OAuthClient')
-    .where('OAuthClient.redirect_uri = :redirectUri', { redirectUri: redirectUri })
-    .getOne();
+    return this._connection
+      .getRepository(OAuthClient)
+      .createQueryBuilder('OAuthClient')
+      .where('OAuthClient.redirect_uri = :redirectUri', {
+        redirectUri: redirectUri,
+      })
+      .getOne();
   }
 
   public getClientByIdentifier(identifier: string): Promise<OAuthClient> {
-    return this._connection.getRepository(OAuthClient)
-    .createQueryBuilder('OAuthClient')
-    .where('OAuthClient.identifier = :identifier', { identifier: identifier })
-    .getOne();
+    return this._connection
+      .getRepository(OAuthClient)
+      .createQueryBuilder('OAuthClient')
+      .where('OAuthClient.identifier = :identifier', { identifier: identifier })
+      .getOne();
   }
 
   public getClientBySecret(secret: string): Promise<OAuthClient> {
-    return this._connection.getRepository(OAuthClient)
-    .createQueryBuilder('OAuthClient')
-    .where('OAuthClient.secret = :secret', { secret: secret })
-    .getOne();
+    return this._connection
+      .getRepository(OAuthClient)
+      .createQueryBuilder('OAuthClient')
+      .where('OAuthClient.secret = :secret', { secret: secret })
+      .getOne();
   }
 
   public getClientsByName(name: string): Promise<OAuthClient[]> {
-    return this._connection.getRepository(OAuthClient)
-    .createQueryBuilder('OAuthClient')
-    .where('OAuthClient.name = :name', { name: name })
-    .getMany();
+    return this._connection
+      .getRepository(OAuthClient)
+      .createQueryBuilder('OAuthClient')
+      .where('OAuthClient.name = :name', { name: name })
+      .getMany();
   }
-
 }

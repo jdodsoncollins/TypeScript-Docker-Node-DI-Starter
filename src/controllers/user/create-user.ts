@@ -3,39 +3,41 @@ import { GetUser } from '../../database/src/Action/User/GetUser';
 import { ApplicationCore } from '../../database/src/Infrastructure/Lib/ApplicationCore';
 import { CreateUser } from '../../database/src/Action/User/CreateUser';
 import { GetOauthAccessToken } from '../../database/src/Action/Oauth/GetOauthAccessToken';
+import { BaseController } from '../BaseController';
 const bcrypt = require('bcrypt');
 
-export let execute = async (req: Request, response: Response) => {
-    console.log('CREATE USER', req.body);
+export class CreateUserController extends BaseController {
+  constructor(req: Request, res: Response) {
+    super();
+  }
+
+  public static async execute(req: Request, response: Response) {
     let firstName = req.body.firstName;
     let lastName = req.body.lastName;
     let emailAddress = req.body.email;
     let password = req.body.password;
     const appCore = new ApplicationCore();
 
-    // let getOAuthTokenResponse;
-    // if (req.headers.authorization) {
-    //     const getOAuthTokenCommand = new GetOauthAccessToken(req.headers.authorization);
-    //     getOAuthTokenResponse = await appCore.dispatchQuery(getOAuthTokenCommand);
-    // }
-
-    // if (!getOAuthTokenResponse) {
-    //     response.status(403);
-    //     return response.json('Unauthorized');
-    // }
+    await super.checkHeaders(req, response, appCore);
 
     if (!emailAddress) {
-        response.status(404);
-        return response.json('Missing email');;
+      response.status(404);
+      return response.json('Missing email');
     }
 
     if (!password) {
-        response.status(404);
-        return response.json('Missing password');;
+      response.status(404);
+      return response.json('Missing password');
     }
 
     const hash = await bcrypt.hash(password, 16.5);
-    const createUserCommand = new CreateUser(firstName, lastName, emailAddress, hash);
+    const createUserCommand = new CreateUser(
+      firstName,
+      lastName,
+      emailAddress,
+      hash
+    );
     const createUserResponse = await appCore.dispatchQuery(createUserCommand);
     return response.json(createUserResponse);
-};
+  }
+}

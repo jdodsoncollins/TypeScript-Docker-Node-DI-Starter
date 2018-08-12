@@ -18,8 +18,8 @@ export class User implements IEntity {
 
   @Column({ type: 'varchar', nullable: true, name: 'password' })
   private _password: string | null;
-  
-  constructor(id:string = null) {
+
+  constructor(id: string = null) {
     this.setId(id);
   }
 

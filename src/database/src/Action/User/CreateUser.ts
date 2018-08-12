@@ -6,20 +6,25 @@ import { User } from '../../DomainModel/User/User';
 export class CreateUser implements ICommand {
   private _user: User | null;
 
-  constructor(private _firstName: string | null, private _lastName: string | null, private _email: string | null = null, private _password: string | null) {
+  constructor(
+    private _firstName: string | null,
+    private _lastName: string | null,
+    private _email: string | null = null,
+    private _password: string | null
+  ) {
     this._user = new User();
     if (_firstName) {
       this.setFirstName(_firstName);
     }
     if (_lastName) {
-        this.setLastName(_lastName);
+      this.setLastName(_lastName);
     }
     if (_email) {
-        this.setEmail(_email);
+      this.setEmail(_email);
     }
     if (_password) {
       this.setPassword(_password);
-  }
+    }
   }
 
   get user(): User {
@@ -27,11 +32,11 @@ export class CreateUser implements ICommand {
   }
 
   private setFirstName(firstName: string) {
-      this._user.firstName = firstName;
+    this._user.firstName = firstName;
   }
 
   private setLastName(lastName: string) {
-      this._user.lastName = lastName;
+    this._user.lastName = lastName;
   }
 
   private setEmail(email: string) {

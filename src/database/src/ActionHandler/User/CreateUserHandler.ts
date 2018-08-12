@@ -3,7 +3,7 @@ import { IResponse } from '../../Infrastructure/Lib/Response/Response';
 import { CreateUser } from '../../Action/User/CreateUser';
 import { UserRepository } from '../../Infrastructure/Repository/UserRepository';
 import 'reflect-metadata';
-import { Service, Container} from 'typedi';
+import { Service, Container } from 'typedi';
 import { OauthRepository } from '../../Infrastructure/Repository/OauthRepository';
 
 export class CreateUserHandler implements ICommandHandler {
@@ -13,7 +13,6 @@ export class CreateUserHandler implements ICommandHandler {
   constructor(private command: CreateUser) {}
 
   async execute(): Promise<IResponse> {
-    await this.oAuthRepository.getAccessTokenById(this.command.token);
     return this.userRepository.createUser(this.command.user);
   }
 }

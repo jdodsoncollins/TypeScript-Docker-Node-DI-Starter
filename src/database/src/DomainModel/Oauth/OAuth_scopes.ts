@@ -4,7 +4,6 @@ import { IEntity } from '../../Infrastructure/Entity/IEntity';
 
 @Entity('OAuthScopes', { name: 'oauth_scopes' })
 export class OAuthScopes implements IEntity {
-
   @PrimaryColumn({ type: 'varchar', nullable: false, name: 'id' })
   private _id: any;
 
@@ -13,8 +12,8 @@ export class OAuthScopes implements IEntity {
 
   @Column({ type: 'varchar', nullable: false, name: 'is_default' })
   private _isDefault: boolean;
-  
-  constructor(id:string = null) {
+
+  constructor(id: string = null) {
     this.setId(id);
   }
 

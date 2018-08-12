@@ -3,7 +3,12 @@ import { IQuery } from '../../Infrastructure/Lib/Bus/Query/IQuery';
 import { GetOAuthClientHandler } from '../../ActionHandler/Oauth/GetOAuthClientHandler';
 
 export class GetOAuthClient implements IQuery {
-  constructor(private _identifier: string = null, private _secret: string | null = null, private _redirectUri: string | null = null, private _name: string | null = null) {}
+  constructor(
+    private _identifier: string = null,
+    private _secret: string | null = null,
+    private _redirectUri: string | null = null,
+    private _name: string | null = null
+  ) {}
 
   get identifier(): string {
     return this._identifier;

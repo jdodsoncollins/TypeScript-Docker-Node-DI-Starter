@@ -1,4 +1,3 @@
 import { ICommand } from '../Bus/Command/ICommand';
 
-export interface IResponse {
-}
+export interface IResponse {}
