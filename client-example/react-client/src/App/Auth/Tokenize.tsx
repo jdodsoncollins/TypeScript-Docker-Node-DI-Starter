@@ -1,8 +1,10 @@
 import * as queryString from 'query-string';
 import * as React from 'react';
+import { Switch, Route, Redirect, RouteProps } from 'react-router';
 import { AccessToken } from './AccessToken';
 import { Routes } from '../../routes/react-routes';
-import { Redirect } from 'react-router-dom';
+import { LOGIN_URL } from '../../environment';
+import { BrowserRouter } from 'react-router-dom';
 
 interface ITokenizeProps {
   accessToken: AccessToken;
@@ -18,12 +20,25 @@ export class Tokenize extends React.Component<ITokenizeProps> {
       const accessToken = AccessToken.createFromJWTString(parsedHash.access_token);
       localStorage.setItem('accessToken', accessToken.accessToken);
     }
+    location.href = LOGIN_URL;
+  }
+
+  public get redirectToExternalLogin() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Route component={() => window.location = `${location.protocol}//${LOGIN_URL}` as any} />
+        </div>
+      </BrowserRouter>
+    )
   }
 
   public render() {
-      console.log(Routes.LOGIN.create({}));
+      console.log(LOGIN_URL);
     return (
-      '<Redirect to={Routes.LOGIN.create({})} />'
+      <div>asdf
+        {this.redirectToExternalLogin}
+      </div>
     )
   }
 }
