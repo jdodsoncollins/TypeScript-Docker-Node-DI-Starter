@@ -8,8 +8,28 @@ import { Tokenize } from './App/Auth/Tokenize';
 import { LOGIN_URL } from './environment';
 import Dashboard from './App/Dashboard/Dashboard';
 import PrivateRoute from './App/Auth/containers/PrivateRoute';
+import { BrowserRouter } from 'react-router-dom';
+import * as queryString from 'query-string';
+import { AccessToken } from './App/Auth/AccessToken';
 
 class App extends React.Component<any & RouteProps, any>  {
+
+  private token: AccessToken | null;
+
+  public componentDidMount() {
+    const values = queryString.parse(this.props.location.search);
+    this.token = values ? AccessToken.createFromTokenOnly(values.token) : null;
+  }
+
+  public get redirectToExternalLogin() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Route component={() => window.location = `${location.protocol}//${LOGIN_URL}` as any} />
+        </div>
+      </BrowserRouter>
+    )
+  }
 
   public render() {
     return (
@@ -21,13 +41,18 @@ class App extends React.Component<any & RouteProps, any>  {
         <Switch>
           <Route
             exact={true}
-            path={Routes.HOME.template()}
-            component={Tokenize}
+            path={Routes.LOGIN.template()}
+            render={props => {
+              // look for some param in the query string...
+              if(this.token) {
+                return <Tokenize accessToken={this.token} />;
+              }
+            }}
           />
-          {/* <Route exact={true}
+          <Route exact={true}
             path={Routes.HOME.template()}
-            render={() => <Redirect to={Routes.LOGIN.template()} />}
-          /> */}
+            render={() => this.redirectToExternalLogin}
+          />
           {/* <Route
               exact={true}
               path={Routes.LOGIN.template()}

@@ -6,13 +6,11 @@ function getBaseUrl(): string {
 }
 
 function getLoginUrl(): string {
-
-  let baseUrl = window.location.origin.toString();
-
-  baseUrl = getBaseUrl();
-  return baseUrl + '/oauth/login?client_id=clientIdAddedToClientTable&redirect_uri=redirectAddedToClientTable/login';
+  const clientId = 'test123';
+  const redirectUri = encodeURIComponent('http://localhost:3002');
+  const baseUrl = getBaseUrl();
+  return baseUrl + '/oauth/login?client_id=' + clientId + '&redirect_uri=' + redirectUri;
 }
-
 
 export const LOGIN_URL = getLoginUrl();
 export const BASE_URL = getBaseUrl();

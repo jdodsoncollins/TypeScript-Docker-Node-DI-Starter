@@ -15,29 +15,14 @@ export class Tokenize extends React.Component<ITokenizeProps> {
 
   constructor(props) {
     super(props);
-    const parsedHash = queryString.parse(props.location.hash);
-    if (parsedHash.access_token) {
-      const accessToken = AccessToken.createFromJWTString(parsedHash.access_token);
-      localStorage.setItem('accessToken', accessToken.accessToken);
-    }
-    location.href = LOGIN_URL;
-  }
-
-  public get redirectToExternalLogin() {
-    return (
-      <BrowserRouter>
-        <div>
-          <Route component={() => window.location = `${location.protocol}//${LOGIN_URL}` as any} />
-        </div>
-      </BrowserRouter>
-    )
+    localStorage.setItem('accessToken', JSON.stringify(this.props.accessToken));
   }
 
   public render() {
       console.log(LOGIN_URL);
     return (
-      <div>asdf
-        {this.redirectToExternalLogin}
+      <div>
+        setting token into local storage
       </div>
     )
   }
