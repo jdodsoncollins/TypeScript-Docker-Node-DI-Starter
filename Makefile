@@ -12,13 +12,8 @@ dev:
 production:
 	npm run set-config:production
 
-build-production:
-	cd docker/client && make build-production push
-	cd docker/server && make build-production push
-
-build-prelive:
-	cd docker/client && make build-prelive push
-	cd docker/server && make build-prelive push
+up:
+	cd docker && make up
 
 clean: stop
 	docker-compose rm

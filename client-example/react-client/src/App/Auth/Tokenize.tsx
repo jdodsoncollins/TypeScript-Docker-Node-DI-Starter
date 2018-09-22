@@ -15,14 +15,16 @@ export class Tokenize extends React.Component<ITokenizeProps> {
 
   constructor(props) {
     super(props);
-    localStorage.setItem('accessToken', JSON.stringify(this.props.accessToken));
+    console.log('access token: ', this.props.accessToken);
+    if (this.props.accessToken) {
+      localStorage.setItem('accessToken', JSON.stringify(this.props.accessToken));
+    }
   }
 
   public render() {
-      console.log(LOGIN_URL);
     return (
       <div>
-        setting token into local storage
+        {this.props.accessToken ? `setting token ${JSON.stringify(this.props.accessToken)} into local storage` : <Route component={() => window.location = `${location.protocol}//${LOGIN_URL}` as any} />}
       </div>
     )
   }

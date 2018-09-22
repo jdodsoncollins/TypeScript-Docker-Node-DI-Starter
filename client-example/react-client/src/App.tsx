@@ -12,13 +12,14 @@ import { BrowserRouter } from 'react-router-dom';
 import * as queryString from 'query-string';
 import { AccessToken } from './App/Auth/AccessToken';
 
-class App extends React.Component<any & RouteProps, any>  {
+class App extends React.Component<any, any>  {
 
   private token: AccessToken | null;
 
-  public componentDidMount() {
-    const values = queryString.parse(this.props.location.search);
-    this.token = values ? AccessToken.createFromTokenOnly(values.token) : null;
+  constructor(props) {
+    super(props);
+    const values = queryString.parse(window.location.search);
+    this.token = values && values.token ? AccessToken.createFromTokenOnly(values.token) : null;
   }
 
   public get redirectToExternalLogin() {
@@ -43,21 +44,13 @@ class App extends React.Component<any & RouteProps, any>  {
             exact={true}
             path={Routes.LOGIN.template()}
             render={props => {
-              // look for some param in the query string...
-              if(this.token) {
-                return <Tokenize accessToken={this.token} />;
-              }
+              return <Tokenize accessToken={this.token} />;
             }}
           />
           <Route exact={true}
             path={Routes.HOME.template()}
             render={() => this.redirectToExternalLogin}
           />
-          {/* <Route
-              exact={true}
-              path={Routes.LOGIN.template()}
-              render={() => this.redirectToLogin()}
-            /> */}
           <PrivateRoute
             exact={true}
             path={Routes.DASHBOARD.template()}

@@ -7,7 +7,7 @@ function getBaseUrl(): string {
 
 function getLoginUrl(): string {
   const clientId = 'test123';
-  const redirectUri = encodeURIComponent('http://localhost:3002');
+  const redirectUri = encodeURIComponent('http://localhost:3002/login');
   const baseUrl = getBaseUrl();
   return baseUrl + '/oauth/login?client_id=' + clientId + '&redirect_uri=' + redirectUri;
 }
