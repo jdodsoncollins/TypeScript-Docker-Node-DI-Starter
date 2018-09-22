@@ -22,6 +22,9 @@ Finally, `npm run serve:dev` and it should be up, hosted on `localhost:3000`.
 
 MySQL is on `127.0.0.1:33066` with username `root` and password `root`. Go in there, and you should see a user table as well as OAuth tables.
 
+#### Client example
+
+In the `/client-example` directory, there is a simple React app (created with Create React App + TypeScript) which begins the oauth flow. The MYSQL database content included in the image includes the proper routing for this example app. It is configured to run off localhost in tandem with the node app.
 
 #### Tests
 
