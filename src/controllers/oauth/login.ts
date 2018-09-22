@@ -9,7 +9,7 @@ import { RouteDefinitions } from '../../routing/route-definitions.constant';
 export let get = async (req: Request, res: Response) => {
   const errors: string[] = [];
   const clientId = req.query.client_id;
-  const redirectUri = req.query.redirect_uri;
+  const redirectUri = decodeURIComponent(req.query.redirect_uri);
 
   if (!clientId) {
     errors.push('client_id is required');
