@@ -16,7 +16,7 @@ First, generate a `.env` file, where variables such as `process.env.SECRET` can 
 
 Then,
 `npm install`
-`cd docker && docker-compose up`
+`make up`
 
 Finally, `npm run serve:dev` and it should be up, hosted on `localhost:3000`. 
 
