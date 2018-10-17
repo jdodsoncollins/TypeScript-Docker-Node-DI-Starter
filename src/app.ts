@@ -3,7 +3,7 @@ import * as express from 'express';
 import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import * as helmet from 'helmet';
-import 'reflect-metadata';
+import * as rateLimit from 'express-rate-limit';
 import * as getUser from './controllers/user/get-user';
 import * as postOAuthAuthorize from './controllers/oauth/authorize';
 import * as getOAuthConfirm from './controllers/oauth/confirm';
@@ -30,15 +30,23 @@ nunjucks.configure(templatePath, {
   express: app,
 });
 
-app.set('port', 3000);
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+  }),
+);
 app.use(compression());
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.set('port', 3000);
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
 
 app.get('/', (req, res) => {
   res.render('index.njk');
